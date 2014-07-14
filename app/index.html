@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Todo</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <!-- build:css styles/vendor.css -->
+    <!-- <link rel="stylesheet" href="vendor/some.contrib.css"> -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    
+  </head>
+  <body ng-app="todo" ng-controller="TodoCtrl">
+	  <ion-side-menus>
+
+    <!-- Center content -->
+  <ion-side-menu-content>
+    <ion-header-bar class="bar-dark">
+      <h1 class="title">Todo</h1>
+      <!-- New Task button-->
+      <button class="button button-icon" ng-click="newTask()">
+        <i class="icon ion-compose"></i>
+      </button>
+    </ion-header-bar>
+    <ion-content>
+      <!-- our list and list items -->
+      <ion-list>
+        <ion-item ng-repeat="task in tasks">
+{{task.title}}
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu-content>
+
+    <!-- Left menu -->
+    <ion-side-menu side="left">
+      <ion-header-bar class="bar-dark">
+        <h1 class="title">Projects</h1>
+      </ion-header-bar>
+    </ion-side-menu>
+    <script id="new-task.html" type="text/ng-template">
+
+  <div class="modal">
+
+    <!-- Modal header bar -->
+    <ion-header-bar class="bar-secondary">
+      <h1 class="title">New Task</h1>
+      <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button>
+    </ion-header-bar>
+
+    <!-- Modal content area -->
+    <ion-content>
+
+      <form ng-submit="createTask(task)">
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="What do you need to do?" ng-model="task.title">
+          </label>
+        </div>
+        <div class="padding">
+          <button type="submit" class="button button-block button-positive">Create Task</button>
+        </div>
+      </form>
+
+    </ion-content>
+
+  </div>
+
+</script>
+
+  </ion-side-menus>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- <script src="vendor/someContribJs.js"></script> -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ionic/release/js/ionic.js"></script>
+    <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <!-- endbuild -->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+  </body>
+</html>
