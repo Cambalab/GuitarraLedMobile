@@ -1,0 +1,14 @@
+node_modules
+*.mo
+*.swp
+*.log
+logs
+platforms
+plugins
+www
+coverage
+merges
+app/bower_components
+.tmp
+.sass-cache
+.DS_Store
