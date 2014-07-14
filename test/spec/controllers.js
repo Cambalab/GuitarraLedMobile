@@ -12,13 +12,13 @@ describe('Controller: TodoCtrl', function () {
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
-    
+
     scope = $rootScope.$new();
-       
+
     todo = $controller('TodoCtrl', {
       $scope: scope
     });
-  
+
   }));
   it('should have no items to start', function () {
     expect(scope.tasks.length).to.equal(0);
