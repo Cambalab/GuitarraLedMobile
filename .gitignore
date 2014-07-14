@@ -3,11 +3,10 @@ node_modules
 *.swp
 *.log
 logs
-platforms
-plugins
-www
+platforms/*
+plugins/*
+www/*
 coverage
-merges
 app/bower_components
 .tmp
 .sass-cache
