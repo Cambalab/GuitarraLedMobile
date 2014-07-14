@@ -15,11 +15,12 @@ git clone http://lanus.elarteylatecnologia.com.ar:8081/fmmainere/guitarraledmobi
 npm install
 bower install
 grunt platform:add:android
-````
+```
 
 ## Run test
 ```
 grunt test
+```
 
 ## Run App
 ```
