@@ -3,9 +3,6 @@ node_modules
 *.swp
 *.log
 logs
-platforms/*
-plugins/*
-www/*
 coverage
 app/bower_components
 .tmp
