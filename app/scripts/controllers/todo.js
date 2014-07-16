@@ -42,4 +42,9 @@ angular.module('todo.controllers', [])
     $scope.closeNewTask = function() {
       $scope.taskModal.hide();
     };
+
+    $scope.removeTask = function (index) {
+      $scope.tasks.splice(index, 1);
+    };
+
   });

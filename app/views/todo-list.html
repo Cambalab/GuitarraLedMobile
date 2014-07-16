@@ -7,6 +7,9 @@
   <ion-list class="card">
     <ion-item ng-repeat="task in tasks">
       {{task.title}}
+      <span class="input-group-btn">
+        <button class="btn btn-danger" ng-click="removeTask($index)" aria-label="Remove">X</button>
+      </span>
     </ion-item>
   </ion-list>
   <div class="card" >
