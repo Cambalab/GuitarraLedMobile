@@ -4,14 +4,16 @@
   <button class="button button-clear" ng-click="#/todo/about">About</button>
 </ion-header-bar>
 <ion-content class="has-header padding" has-tabs="true">
-  <ion-list class="card">
-    <ion-item ng-repeat="task in tasks">
-      {{task.title}}
-      <span class="input-group-btn">
-        <button class="btn btn-danger" ng-click="removeTask($index)" aria-label="Remove">X</button>
-      </span>
-    </ion-item>
-  </ion-list>
+
+<div class="list">
+  <div class="item item-button-right" ng-repeat="task in tasks">
+    {{task.title}}
+    <button class="button button-positive" ng-click="removeTask($index)">
+      <i class="icon ion-trash-b"></i>
+    </button>
+  </div>
+</div>
+
   <div class="card" >
     <div class="item item-text-wrap" ng-show="!tasks.length">
       <span>
