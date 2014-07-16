@@ -1,0 +1,19 @@
+<ion-header-bar class="bar-positive">
+  <button class="button button-clear" ng-click="newTask()">New</button>
+  <h1 class="title">My Todo List</h1>
+  <button class="button button-clear" ng-click="#/todo/about">About</button>
+</ion-header-bar>
+<ion-content class="has-header padding" has-tabs="true">
+  <ion-list class="card">
+    <ion-item ng-repeat="task in tasks">
+      {{task.title}}
+    </ion-item>
+  </ion-list>
+  <div class="card" >
+    <div class="item item-text-wrap" ng-show="!tasks.length">
+      <span>
+        No Items in your todo List. Click  <a href="javascript:" ng-click="newTask()">Here</a> and create one
+      </span>
+    </div>
+   </div>
+</ion-content>
