@@ -1,6 +1,9 @@
 {
-  "name": "Todo",
-  "version": "0.0.0",
+  "name": "Guitarra Led Mobile",
+  "description": "Plataforma mobile para controlar Guitarra Led",
+  "version": "0.0.1",
+  "license": "agplv3",
+  "author": "Crear Arte y Tecnología <crear@elarteylatecnologia.com.ar>",
   "dependencies": {
     "ionic": "v1.0.0-beta.8"
   },
