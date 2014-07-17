@@ -1,10 +1,12 @@
-<ion-tabs class="tabs-icon-top">
-  <ion-tab title="My List" icon-on="ion-android-storage"
+<ion-tabs class="tabs-icon-top" ng-controller="TodoCtrl">
+  <ion-tab title="{{ 'NAV_TITLE_1' | translate }}" icon-on="ion-android-storage"
     icon-off="ion-andriod-storage-outline" href="#/todo/list">
     <ion-nav-view name="todo-list"></ion-nav-view>
   </ion-tab>
-  <ion-tab title="About" icon-on="ion-android-information"
+  <ion-tab title="{{ 'NAV_TITLE_2' | translate }}" icon-on="ion-android-information"
     icon-off="ion-android-information-outline" href="#/todo/about">
     <ion-nav-view name="todo-about"></ion-nav-view>
   </ion-tab>
+  <button class="button button-royal" ng-click="changeLanguage('es')" translate="BUTTON_LANG_ES"></button>
+  <button class="button button-royal" ng-click="changeLanguage('en')" translate="BUTTON_LANG_EN"></button>
 </ion-tabs>

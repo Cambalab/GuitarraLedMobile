@@ -9,9 +9,13 @@
 */
 
 angular.module('todo.controllers', [])
-  .controller('TodoCtrl', function($scope, $ionicModal) {
+  .controller('TodoCtrl', function($scope, $ionicModal, $translate) {
     $scope.tasks = [];
     $scope.task = { item: '' };
+
+    $scope.changeLanguage = function (langKey) {
+      $translate.use(langKey);
+    };
 
     // Create and load the Modal
     $ionicModal.fromTemplateUrl('views/new-task.html', function(modal) {

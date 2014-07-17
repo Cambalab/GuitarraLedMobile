@@ -13,6 +13,7 @@ angular
   .module('todo', [
     'ionic',
     'todo.controllers',
+    'pascalprecht.translate'
   ])
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -21,6 +22,12 @@ angular
       }
     });
   })
+  .config(['$translateProvider', function($translateProvider) {
+    $translateProvider
+      .translations('en', translationsEN)
+      .translations('es', translationsES)
+      .preferredLanguage('es');
+  }])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('todo', {
