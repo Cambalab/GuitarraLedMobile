@@ -2,17 +2,17 @@
 
 /**
  * @ngdoc overview
- * @name mytodoApp
+ * @name gledmobile
  * @description
- * # mytodoApp
+ * # Guitarra Led Mobile
  *
  * Main module of the application.
  */
 
 angular
-  .module('todo', [
+  .module('gledmobile', [
     'ionic',
-    'todo.controllers',
+    'gledmobile.controllers',
     'pascalprecht.translate'
   ])
   .run(function($ionicPlatform) {
@@ -30,28 +30,28 @@ angular
   }])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('todo', {
-        url: '/todo',
+      .state('gledmobile', {
+        url: '/gledmobile',
         abstract: true,
-        templateUrl: 'views/todo.html'
+        templateUrl: 'views/gledmobile.html'
       })
-      .state('todo.list', {
-        url: '/list',
+      .state('gledmobile.list', {
+        url: '/guitarlist',
         views: {
-          'todo-list': {
-            templateUrl: 'views/todo-list.html',
-            controller: 'TodoCtrl'
+          'gledmobile-guitarlist': {
+            templateUrl: 'views/gledmobile-guitarlist.html',
+            controller: 'GLedCtrl'
           }
         }
       })
-      .state('todo.about', {
+      .state('gledmobile.about', {
         url: '/about',
         views: {
-          'todo-about': {
-            templateUrl: 'views/todo-about.html'
+          'gledmobile-about': {
+            templateUrl: 'views/gledmobile-about.html'
           }
         }
       });
 
-    $urlRouterProvider.otherwise('/todo/list');
+    $urlRouterProvider.otherwise('/gledmobile/guitarlist');
   });
