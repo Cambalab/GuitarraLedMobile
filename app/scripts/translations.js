@@ -13,6 +13,10 @@ var translationsEN = {
   ABOUT: 'About',
   BUTTON_LANG_ES: 'ES',
   BUTTON_LANG_EN: 'EN',
+  NEXT:	'Next',
+  CHORDS: 'Chords',
+  SCALES: 'Scales',
+  SONGS: 'Songs',
 };
 
 var translationsES = {
@@ -30,6 +34,10 @@ var translationsES = {
   ABOUT: 'Acerca',
   BUTTON_LANG_ES: 'ES',
   BUTTON_LANG_EN: 'EN',
+  NEXT:	'Siguiente',
+  CHORDS: 'Acordes',
+  SCALES: 'Escalas',
+  SONGS: 'Canciones',
 };
 
 

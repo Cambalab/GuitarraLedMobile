@@ -33,14 +33,22 @@ angular
       .state('gledmobile', {
         url: '/gledmobile',
         abstract: true,
-        templateUrl: 'views/gledmobile.html'
+        templateUrl: 'views/gledmobile.html',
+        controller: 'GLedCtrl'
       })
       .state('gledmobile.list', {
         url: '/guitarlist',
         views: {
           'gledmobile-guitarlist': {
-            templateUrl: 'views/gledmobile-guitarlist.html',
-            controller: 'GLedCtrl'
+            templateUrl: 'views/gledmobile-guitarlist.html'
+          }
+        }
+      })
+      .state('gledmobile.modes', {
+        url: '/modes',
+        views: {
+          'gledmobile-guitarlist': {
+            templateUrl: 'views/gledmobile-modes.html'
           }
         }
       })
