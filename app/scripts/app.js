@@ -52,6 +52,14 @@ angular
           }
         }
       })
+      .state('gledmobile.songlist', {
+        url: '/songlist',
+        views: {
+          'gledmobile-guitarlist': {
+            templateUrl: 'views/gledmobile-songlist.html'
+          }
+        }
+      })
       .state('gledmobile.about', {
         url: '/about',
         views: {
