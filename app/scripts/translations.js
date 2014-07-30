@@ -17,6 +17,7 @@ var translationsEN = {
   CHORDS: 'Chords',
   SCALES: 'Scales',
   SONGS: 'Songs',
+  SEARCH: 'Search',
 };
 
 var translationsES = {
@@ -38,6 +39,7 @@ var translationsES = {
   CHORDS: 'Acordes',
   SCALES: 'Escalas',
   SONGS: 'Canciones',
+  SEARCH: 'Buscar',
 };
 
 

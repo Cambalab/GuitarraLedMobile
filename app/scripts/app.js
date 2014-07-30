@@ -56,7 +56,8 @@ angular
         url: '/songlist',
         views: {
           'gledmobile-guitarlist': {
-            templateUrl: 'views/gledmobile-songlist.html'
+            templateUrl: 'views/gledmobile-songlist.html',
+            controller: 'SongsCtrl'
           }
         }
       })

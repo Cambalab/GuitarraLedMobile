@@ -1,25 +1,14 @@
 <ion-content class="has-header padding" has-tabs="true">
-	<div ng-controller="UsersCtrl">
-        <h1>{{title}}</h1>
-        Search: <input ng-model="search">
+	<div ng-controller="SongsCtrl" class="list card">
+        <h1>{{ 'SONGS' | translate }}</h1>
+        {{ 'SEARCH' | translate }}: <input ng-model="search">
         <ul>
-            <li ng-repeat="user in users | filter:search">
-                {{user.name}}
+            <li ng-repeat="song in songs | filter:search">
+                <a href="#" class="item item-icon-left">
+                  <i class="icon ion-ios7-play"></i>
+                  {{song.name}} - {{song.author}}
+                </a>
             </li>
         </ul>
     </div>
-    <script>
-        function UsersCtrl($scope) {
-            $scope.users = [
-                { name: "Camila Gilson" },
-                { name: "Chloe Creighton" },
-                { name: "Zoey White" },
-                { name: "Claire Campbell" },
-                { name: "Kylie Smith" },
-                { name: "Charlotte Gilson" }
-            ];
-            
-            $scope.title = 'User list';
-        }
-    </script>
 </ion-content>
