@@ -15,7 +15,9 @@ angular
     '<%= appName %>.controllers',
     '<%= appName %>.services',
     'pascalprecht.translate',
-    'underscore'
+    'underscore',
+    'ngStorage',
+    'ngCordova'
   ])
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -106,7 +108,8 @@ angular
         url: '/about',
         views: {
           'gledmobile-about': {
-            templateUrl: 'views/gledmobile-about.html'
+            templateUrl: 'views/gledmobile-about.html',
+            controller: 'BtCtrl'
           }
         }
       });
