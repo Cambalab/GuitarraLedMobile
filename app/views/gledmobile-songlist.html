@@ -1,14 +1,18 @@
 <ion-content class="has-header padding" has-tabs="true">
-	<div ng-controller="SongsCtrl" class="list card">
-        <h1>{{ 'SONGS' | translate }}</h1>
-        {{ 'SEARCH' | translate }}: <input ng-model="search">
-        <ul>
-            <li ng-repeat="song in songs | filter:search">
-                <a href="#" class="item item-icon-left">
-                  <i class="icon ion-ios7-play"></i>
-                  {{song.name}} - {{song.author}}
-                </a>
-            </li>
-        </ul>
-    </div>
+  <h1>{{ 'SONGS' | translate }}</h1>
+  <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input ng-model="search" placeholder="{{ 'SEARCH' | translate }}">
+  </label>
+
+  <div ng-controller="SongsCtrl" class="list card">
+    <ul>
+      <li ng-repeat="song in songs | filter:search">
+        <a href="#" class="item item-icon-left">
+          <i class="icon ion-ios7-play"></i>
+          {{song.name}} - {{song.author}}
+        </a>
+      </li>
+    </ul>
+  </div>
 </ion-content>
