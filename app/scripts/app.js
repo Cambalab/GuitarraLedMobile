@@ -61,6 +61,16 @@ angular
           }
         }
       })
+      .state('gledmobile.chords', {
+        url: '/chords',
+        views: {
+          'gledmobile-guitarlist': {
+            templateUrl: 'views/gledmobile-chords.html',
+            controller: 'ChordsCtrl'
+          }
+        }
+      })
+
       .state('gledmobile.about', {
         url: '/about',
         views: {
