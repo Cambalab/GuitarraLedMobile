@@ -8,7 +8,9 @@
 * Controller of the todo
 */
 
-angular.module('gledmobile.controllers', [])
+angular.module('gledmobile.controllers',[]);
+
+angular.module('gledmobile.controllers')
   .controller('GLedCtrl',function($scope,$location, $ionicModal, $translate) {
     $scope.guitars = [];
     $scope.guitar = { item: '' };
@@ -42,22 +44,11 @@ angular.module('gledmobile.controllers', [])
     $scope.closeAddGuitar = function() {
       $scope.guitarModal.hide();
     };
-    
+
     $scope.removeGuitar = function (index) {
       $scope.guitars.splice(index, 1);
     };
     $scope.go = function ( path ) {
       $location.path( path );
     };
-  }).controller('SongsCtrl',function($scope) {
-	  $scope.songs = [
-                { name: "Green River", author: "Creedence" },
-                { name: "Mi Vieja", author: "Pappo" },
-                { name: "Asesíname", author: "Charly Garcia" },
-                { name: "Juntos a la Par", author: "Pappo" },
-                { name: "Snow", author: "Red Hot Chili Peppers" },
-                { name: "Smoke on the Water", author: "Deep Purple" }
-            ];
-	  });
-
-
+  });
