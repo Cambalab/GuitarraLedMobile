@@ -73,7 +73,15 @@ angular
           }
         }
       })
-
+      .state('gledmobile.scales', {
+        url: '/scales',
+        views: {
+          'gledmobile-guitarlist': {
+            templateUrl: 'views/gledmobile-scales.html',
+            controller: 'ScalesCtrl'
+          }
+        }
+      })
       .state('gledmobile.about', {
         url: '/about',
         views: {
