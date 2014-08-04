@@ -15,10 +15,6 @@ angular.module('gledmobile.controllers')
     $scope.guitars = [];
     $scope.guitar = { item: '' };
 
-    $scope.changeLanguage = function (langKey) {
-      $translate.use(langKey);
-    };
-
     $ionicModal.fromTemplateUrl('views/add-guitar.html', function(modal) {
       $scope.guitarModal = modal;
     }, {

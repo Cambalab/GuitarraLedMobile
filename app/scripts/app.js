@@ -26,7 +26,10 @@ angular
     $translateProvider
       .translations('en', translationsEN)
       .translations('es', translationsES)
-      .preferredLanguage('es');
+      .determinePreferredLanguage(function() {
+        var preferredlangKey = 'es';
+        return preferredlangKey;
+      });
   }])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
