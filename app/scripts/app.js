@@ -9,11 +9,6 @@
  * Main module of the application.
  */
 
-var underscore = angular.module('underscore', []);
-underscore.factory('_', function() {
-  return window._;
-});
-
 angular
   .module('<%= appName %>', [
     'ionic',
@@ -81,11 +76,11 @@ angular
         }
       })
       .state('gledmobile.chord-display', {
-        url: '/chord-display',
+        url: '/chord-display/:chordName',
         views: {
           'gledmobile-guitarlist': {
             templateUrl: 'views/gledmobile-chord-display.html',
-            controller: 'ChordsCtrl'
+            controller: 'ChordDisplayCtrl'
           }
         }
       })

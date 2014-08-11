@@ -2,10 +2,10 @@
 
 /**
 * @ngdoc function
-* @name todo.controller:GLedCtrl
+* @name gledmobile.controller:GLedCtrl
 * @description
 * # GLedCtrl
-* Controller of the todo
+* Controller of gledmobile
 */
 
 angular.module('<%= appName %>.controllers',[]);
