@@ -8,9 +8,7 @@
 * Controller of the gledmobile
 */
 
-angular.module('gledmobile.controllers')
-  .controller('ChordsCtrl',function($scope) {
-	  $scope.chords = [
-                { name: "C", abc: "|CEGc|", hex:"" }
-            ];
+angular.module('<%= appName %>.controllers')
+  .controller('ChordsCtrl',function($scope, ChordService) {
+	  $scope.chords = ChordService.all();
 	  });

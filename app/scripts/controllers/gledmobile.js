@@ -8,9 +8,9 @@
 * Controller of the todo
 */
 
-angular.module('gledmobile.controllers',[]);
+angular.module('<%= appName %>.controllers',[]);
 
-angular.module('gledmobile.controllers')
+angular.module('<%= appName %>.controllers')
   .controller('GLedCtrl',function($scope,$location, $ionicModal, $translate) {
     $scope.guitars = [];
     $scope.guitar = { item: '' };

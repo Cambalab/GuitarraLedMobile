@@ -8,7 +8,7 @@
 * Controller of the todo
 */
 
-angular.module('gledmobile.controllers')
+angular.module('<%= appName %>.controllers')
   .controller('SongsCtrl',function($scope) {
 	  $scope.songs = [
                 { name: "Green River", author: "Creedence" },

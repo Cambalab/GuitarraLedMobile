@@ -9,11 +9,18 @@
  * Main module of the application.
  */
 
+var underscore = angular.module('underscore', []);
+underscore.factory('_', function() {
+  return window._;
+});
+
 angular
-  .module('gledmobile', [
+  .module('<%= appName %>', [
     'ionic',
-    'gledmobile.controllers',
-    'pascalprecht.translate'
+    '<%= appName %>.controllers',
+    '<%= appName %>.services',
+    'pascalprecht.translate',
+    'underscore'
   ])
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -69,6 +76,15 @@ angular
         views: {
           'gledmobile-guitarlist': {
             templateUrl: 'views/gledmobile-chords.html',
+            controller: 'ChordsCtrl'
+          }
+        }
+      })
+      .state('gledmobile.chord-display', {
+        url: '/chord-display',
+        views: {
+          'gledmobile-guitarlist': {
+            templateUrl: 'views/gledmobile-chord-display.html',
             controller: 'ChordsCtrl'
           }
         }

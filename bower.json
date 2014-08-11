@@ -6,7 +6,8 @@
   "author": "Crear Arte y Tecnología <crear@elarteylatecnologia.com.ar>",
   "dependencies": {
     "ionic": "v1.0.0-beta.8",
-    "angular-translate": "~2.2.0"
+    "angular-translate": "~2.2.0",
+    "underscore": "~1.6.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.17",

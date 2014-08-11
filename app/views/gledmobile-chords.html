@@ -8,7 +8,7 @@
   <div ng-controller="ChordsCtrl" class="list card">
     <ul>
       <li ng-repeat="chord in chords | filter:search">
-        <a href="#" class="item item-icon-left">
+        <a href="#/gledmobile/chord-display/{{chord.id}}" class="item item-icon-left">
           <i class="icon ion-ios7-play"></i>
           {{chord.name}}
         </a>
