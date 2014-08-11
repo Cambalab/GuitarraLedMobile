@@ -4,7 +4,8 @@ angular.module('<%= appName %>.services')
 .factory('ChordService', function(_) {
   
   var chords = [
-    { name: "C", abc: "|CEGc|", hex:"" }
+    { name: "C", abc: "|CEGc|", hex:"" },
+    { name: "D", abc: "|CEGc|", hex:"" }
   ];
 
   return {
