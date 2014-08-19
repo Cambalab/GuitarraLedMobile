@@ -20,11 +20,9 @@ angular.module('<%= appName %>.services')
     { name: "Bm", abc: "", hex:"" },
     { name: "C#", abc: "", hex:"" },
     { name: "D#", abc: "", hex:"" },
-    { name: "E#", abc: "", hex:"" },
     { name: "F#", abc: "", hex:"" },
     { name: "G#", abc: "", hex:"" },
-    { name: "A#", abc: "", hex:"" },
-    { name: "B#", abc: "", hex:"" }
+    { name: "A#", abc: "", hex:"" }
   ];
 
   return {
