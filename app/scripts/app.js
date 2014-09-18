@@ -93,6 +93,15 @@ angular
           }
         }
       })
+      .state('gledmobile.song', {
+        url: '/song',
+        views: {
+          'gledmobile-guitarlist': {
+            templateUrl: 'views/gledmobile-song.html',
+            controller: 'SongCtrl'
+          }
+        }
+      })
       .state('gledmobile.about', {
         url: '/about',
         views: {
