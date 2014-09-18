@@ -1,0 +1,18 @@
+<ion-content class="has-header padding" has-tabs="true">
+  <h1>{{ 'SCALES' | translate }}</h1>
+  <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input ng-model="search" placeholder="{{ 'SEARCH' | translate }}">
+  </label>
+
+  <div ng-controller="ScalesCtrl" class="list card">
+    <ul>
+      <li ng-repeat="scale in scales | filter:search">
+        <a href="#" class="item item-icon-left">
+          <i class="icon ion-ios7-play"></i>
+          {{scale.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</ion-content>

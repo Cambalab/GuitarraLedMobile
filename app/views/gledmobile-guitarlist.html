@@ -1,0 +1,20 @@
+<ion-content class="has-header padding" has-tabs="true">
+<div class="list">
+  <div class="item item-button-right" ng-repeat="guitar in guitars">
+    {{guitar.alias}}
+    <button class="button button-positive" ng-click="removeGuitar($index)">
+      <i class="icon ion-trash-b"></i>
+    </button>
+  </div>
+</div>
+
+  <div class="card" >
+    <div class="item item-text-wrap" ng-show="!guitars.length">
+      <span>
+        {{ 'NO_GUITARS' | translate }}  <a href="javascript:" ng-click="addGuitar()">{{ 'HERE' | translate }}</a>
+      </span>
+    </div>
+   </div>
+   <a class="button icon ion-chevron-right" ui-sref="gledmobile.modes">{{ 'NEXT' | translate }}</a>
+          
+</ion-content>

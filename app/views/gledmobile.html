@@ -1,0 +1,15 @@
+<ion-header-bar class="bar-positive">
+  <button class="button button-clear" ng-click="addGuitar()">{{ 'ADD' | translate }}</button>
+  <h1 class="title">{{ 'APP_TITLE' | translate }}</h1>
+  <button class="button button-clear" ng-click="go('/gledmobile/about')">{{ 'ABOUT' | translate }}</button>
+</ion-header-bar>
+<ion-tabs class="tabs-icon-top" ng-controller="GLedCtrl">
+  <ion-tab title="{{ 'NAV_TITLE_1' | translate }}" icon-on="ion-android-storage"
+    icon-off="ion-andriod-storage-outline" href="#/gledmobile/guitarlist">
+    <ion-nav-view name="gledmobile-guitarlist"></ion-nav-view>
+  </ion-tab>
+  <ion-tab title="{{ 'NAV_TITLE_2' | translate }}" icon-on="ion-android-information"
+    icon-off="ion-android-information-outline" href="#/gledmobile/about">
+    <ion-nav-view name="gledmobile-about"></ion-nav-view>
+  </ion-tab>
+</ion-tabs>

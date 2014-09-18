@@ -1,0 +1,19 @@
+<ion-content class="has-header padding" has-tabs="true">
+  <h1>{{ 'CHORDS' | translate }}</h1>
+  <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input ng-model="search" placeholder="{{ 'SEARCH' | translate }}">
+  </label>
+
+  <div ng-controller="ChordsCtrl" class="list card">
+    <ul>
+      <li ng-repeat="chord in chords | filter:search">
+        <a ui-sref="gledmobile.chord-display({chordName: chord.name})" class="item item-icon-left">
+          <i class="icon ion-ios7-play"></i>
+          {{chord.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</ion-content>
+
