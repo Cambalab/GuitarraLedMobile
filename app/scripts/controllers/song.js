@@ -37,6 +37,7 @@ angular.module('<%= appName %>.controllers')
         $tab.empty().append(tabCode);
         var tabDiv = new Vex.Flow.TabDiv("#tab");
         var player = new TabPlayer({ 'tabDiv': tabDiv, 'tempo': 60 });
+        document.addEventListener('note', function (note) { console.log(note.detail.current.position) }, false);
       }
 
     }, function(error) {
