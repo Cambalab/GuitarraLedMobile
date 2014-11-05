@@ -2,30 +2,12 @@
   <div class="list list-inset"  style="background: #1b5a83">
     <div class="item item-image" style="border:none;margin-top:50px;">
     </div>
-    <button class="button button-block button-light">
-      <i class="icon ion-social-facebook"></i>
-      &nbsp;{{ 'APP_TITLE' | translate }}
-    </button>
-
-    <ion-toggle ng-model="$storage.connect" ng-checked="$storage.connect">Connect</ion-toggle>
 
     <button class="button button-balanced" ng-click="connect()">Connect</button>
-    <button class="button button-assertive" ng-click="disconnect()">DisConnect</button>
+    <button class="button button-assertive" ng-click="disconnect()">Disconnect</button>
     <button class="button button-assertive" ng-click="isConnected()">isConnected</button>
     <button class="button button-assertive" ng-click="repeat(500)">sendData</button>
 
-    <div class="list">
-      <div class="item range range-positive">
-          <i class="icon ion-ios7-sunny-outline"></i>
-          <input type="range" name="repeat" min="100" max="300" ng-model="$storage.repeat">
-          <i class="icon ion-ios7-sunny"></i>
-      </div>
-    </div>
-<!--
-    <div class="item item-divider">
-      <pre ng-bind="$storage | json"></pre>
-    </div>
--->
     <div class="list">Lista
       <div class="item item-button-right" ng-repeat="device in devices">
         {{device.name}} {{ device.id }}

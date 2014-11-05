@@ -12,30 +12,34 @@ angular.module('<%= appName %>.controllers')
   .controller('BtCtrl', function($scope, $localStorage, $cordovaBluetoothSerial) {
 
     $scope.devices = '';
-
+    var conectado = false;
     $scope.$storage = $localStorage.$default({
       connect : false,
       repeat: 200,
     });
 
-    var ledArray = [0x0000, 0x0001, 0x0002, 0x0004, 0x0008, 0x0010];
-/*
-    $scope.$watch('$storage.connect', function(newVal, oldVal) {
-      if(newVal === true) {
-        $scope.repeat($scope.$storage.repeat);
-      } else {
-        $scope.disconnect();
+    var ledArray = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
+    document.addEventListener('note', function (note) {
+      console.log(note.detail.current.position);
+      $scope.toLedArray(note.detail.current.position);
+      console.log(ledArray)
+      }, false);
+    $scope.toLedArray = function(position){
+      ledArray = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
+      for (var i = 0; i < position.length ; i++) {
+        ledArray[position[i].str-1] = parseInt(position[i].fret)
       }
-    }, true);
-*/
+    };
     $scope.connect = function() {
 
-    $cordovaBluetoothSerial.connect('20:13:09:05:34:47').then(
+    $cordovaBluetoothSerial.connect('20:14:04:09:17:21').then(
       function(success) {
           console.log('Conecto', success);
+          conectado = true;
         } ,
         function(fail) {
           console.log('error', fail);
+          conectado = false;
         }
       );
     };
@@ -44,9 +48,11 @@ angular.module('<%= appName %>.controllers')
       $cordovaBluetoothSerial.disconnect().then(
         function(success) {
           console.log('Desconecto', success);
+          conectado = false;
         } ,
         function(fail) {
           console.log('error', fail);
+          conectado = false;
         }
       );
     };
@@ -74,20 +80,15 @@ angular.module('<%= appName %>.controllers')
       );
     };
 
-    $scope.sendData = function(ledArray) {
-      $cordovaBluetoothSerial.isConnected().then(
-        function(success) {
+    $scope.sendData = function(stringsData) {
+      if(conectado){
           $cordovaBluetoothSerial.write('N');
-  		    for (var i = ledArray.length-1; i >= 0 ; i--) {
-            $cordovaBluetoothSerial.write(String.fromCharCode((ledArray[i]>>16) & 0xff));
-	          $cordovaBluetoothSerial.write(String.fromCharCode((ledArray[i]>>8) & 0xff));
-			      $cordovaBluetoothSerial.write(String.fromCharCode(ledArray[i] & 0xff));
+  		    for (var i = stringsData.length-1; i >= 0 ; i--) {
+            $cordovaBluetoothSerial.write(String.fromCharCode((stringsData[i]>>16) & 0xff));
+	          $cordovaBluetoothSerial.write(String.fromCharCode((stringsData[i]>>8) & 0xff));
+			      $cordovaBluetoothSerial.write(String.fromCharCode(stringsData[i] & 0xff));
 		      }
-        },
-        function (err) {
-          $scope.connect();
-        }
-      );
+      }
     };
 
     $scope.repeat = function(mills) {
@@ -96,5 +97,4 @@ angular.module('<%= appName %>.controllers')
       }, mills);
     };
 
-    $scope.listDevices();
   });
