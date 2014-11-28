@@ -11,40 +11,55 @@
 angular.module('<%= appName %>.controllers',[]);
 
 angular.module('<%= appName %>.controllers')
-  .controller('GLedCtrl',function($scope,$location, $ionicModal, $translate) {
-    $scope.guitars = [];
-    $scope.guitar = { item: '' };
+  .controller('GLedCtrl',function($scope, $ionicModal, $ionicLoading, $log, $cordovaBluetoothSerial) {
+  $scope.bluetoothDevices = [];
+  $log.debug($cordovaBluetoothSerial);
+  function reloadBTDevices() {
+    $cordovaBluetoothSerial.list(function(devices) {
+      $scope.bluetoothDevices = devices;
+      $scope.$apply();
+      $log.debug("hola");
+    },function(a){$log.debug(a)});
+  };
 
-    $ionicModal.fromTemplateUrl('views/add-guitar.html', function(modal) {
-      $scope.guitarModal = modal;
-    }, {
-      scope: $scope,
-      animation: 'slide-in-up'
+  if (ionic.Platform.isAndroid()) {
+    setInterval(reloadBTDevices, 2000);
+  } else {
+    $scope.bluetoothDevices.push({
+      name: "dummy BT device",
+      address: "20:14:04:09:17:25",
+      id: "20:14:04:09:17:25",
+      "class": 7936,
+    });
+  }
+
+  $scope.conectarBluetooth = function(options) {
+    var options = options || {debug: true};
+
+    if (!options.device) {
+      return;
+    }
+
+    var device = options.device;
+
+    $cordovaBluetoothSerial.disconnect();
+    $ionicLoading.show({
+      template: 'Conectando a ' + device.name + ' ...',
     });
 
-    $scope.createGuitar = function() {
-      var item = this.guitar.alias;
-      if(!item) { return; }
+    $cordovaBluetoothSerial.connect(device.address,
+      function() {
+        $log.debug('bluetooth connect OK   : ', device.name, ' ', arguments);
+        $ionicLoading.hide();
+      },
 
-      $scope.guitars.push({
-        title: item
-      });
-      $scope.guitarModal.hide();
-      this.guitar.title = '';
-    };
-
-    $scope.addGuitar = function() {
-      $scope.guitarModal.show();
-    };
-
-    $scope.closeAddGuitar = function() {
-      $scope.guitarModal.hide();
-    };
-
-    $scope.removeGuitar = function (index) {
-      $scope.guitars.splice(index, 1);
-    };
-    $scope.go = function ( path ) {
-      $location.path( path );
-    };
+      function(err) {
+        $log.debug('bluetooth connect error: ', err);
+        $ionicLoading.show({
+          template: 'Bluetooth error: ' + err,
+          duration: 1500,
+        });
+      }
+    );
+  }
   });

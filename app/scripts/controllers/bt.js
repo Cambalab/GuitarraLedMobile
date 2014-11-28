@@ -20,7 +20,6 @@ angular.module('<%= appName %>.controllers')
 
     var ledArray = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
     document.addEventListener('note', function (note) {
-      console.log(note.detail.current.position);
       $scope.toLedArray(note.detail.current.position);
       console.log(ledArray)
       }, false);
@@ -32,7 +31,7 @@ angular.module('<%= appName %>.controllers')
     };
     $scope.connect = function() {
 
-    $cordovaBluetoothSerial.connect('20:14:04:09:17:21').then(
+    $cordovaBluetoothSerial.connect('20:13:09:05:34:47').then(
       function(success) {
           console.log('Conecto', success);
           conectado = true;

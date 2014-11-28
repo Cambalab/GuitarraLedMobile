@@ -10,6 +10,11 @@
 
   <div class="card" >
     <div class="item item-text-wrap" ng-show="!guitars.length">
+      <ion-list>
+          <ion-item nav-clear ng-repeat="device in bluetoothDevices" ng-click="conectarBluetooth({debug:false, device:device})">
+            {{ device.name }}
+          </ion-item>
+      </ion-list>
       <span>
         {{ 'NO_GUITARS' | translate }}  <a href="javascript:" ng-click="addGuitar()">{{ 'HERE' | translate }}</a>
       </span>

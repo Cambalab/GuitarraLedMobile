@@ -10,11 +10,13 @@
 
 angular.module('<%= appName %>.controllers')
   .controller('SongCtrl',function($scope) {
-    var score = alphatab.importer.ScoreLoader.loadScoreAsync("prueba.gp5",function(score) {
+    var file = "prueba.gp5";
+    var title = file.replace(/\.[^/.]+$/, "");
+    var score = alphatab.importer.ScoreLoader.loadScoreAsync(file,function(score) {
       $scope.song = toJson(score);
-      console.log(toVexTabCode($scope.song));
+      console.log($scope.song);
       var song = {
-        "title": "Blues Jam",
+        "title": title,
         "artist": $scope.song.artist,
         "timeSignature": [4, 4],
         "tempo": 80,
