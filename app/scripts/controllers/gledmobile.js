@@ -11,55 +11,34 @@
 angular.module('GLedMovile.controllers',[]);
 
 angular.module('GLedMovile.controllers')
-  .controller('GLedCtrl',function($scope, $ionicModal, $ionicLoading, $log, $cordovaBluetoothSerial) {
-  $scope.bluetoothDevices = [];
-  $log.debug($cordovaBluetoothSerial);
-  function reloadBTDevices() {
-    $cordovaBluetoothSerial.list(function(devices) {
-      $scope.bluetoothDevices = devices;
-      $scope.$apply();
-      $log.debug("hola");
-    },function(a){$log.debug(a)});
-  };
+  .controller('GLedCtrl',function($scope, $ionicModal, $ionicLoading, $log, $cordovaBluetoothSerial, BluetoothService) {
 
-  if (ionic.Platform.isAndroid()) {
-    setInterval(reloadBTDevices, 2000);
-  } else {
-    $scope.bluetoothDevices.push({
-      name: "dummy BT device",
-      address: "20:14:04:09:17:25",
-      id: "20:14:04:09:17:25",
-      "class": 7936,
-    });
-  }
-
+  $scope.bluetoothDevices = BluetoothService.devices
   $scope.conectarBluetooth = function(options) {
-    var options = options || {debug: true};
-
-    if (!options.device) {
-      return;
-    }
-
     var device = options.device;
 
-    $cordovaBluetoothSerial.disconnect();
     $ionicLoading.show({
       template: 'Conectando a ' + device.name + ' ...',
     });
 
-    $cordovaBluetoothSerial.connect(device.address,
-      function() {
-        $log.debug('bluetooth connect OK   : ', device.name, ' ', arguments);
-        $ionicLoading.hide();
-      },
 
-      function(err) {
-        $log.debug('bluetooth connect error: ', err);
-        $ionicLoading.show({
-          template: 'Bluetooth error: ' + err,
-          duration: 1500,
-        });
-      }
-    );
+    BluetoothService.conectar(options)
+    .then( function(device) {
+      $ionicLoading.hide();
+    })
+    .catch( function(device) {
+      $ionicLoading.show({
+        template: 'Bluetooth error: ' + err,
+        duration: 1500,
+      });
+    });
+
   }
+
+  $log.debug($cordovaBluetoothSerial);
+
+  $scope.addGuitar = function() {
+
+  }
+
   });
