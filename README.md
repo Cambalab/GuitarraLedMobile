@@ -24,6 +24,13 @@ grunt test
 
 ## Run App
 ```
-grunt build
+grunt cordova
 grunt run
 ```
+
+## Run App
+```
+grunt cordova
+adb install -r platforms/android/ant-build/GuitarraLedMobile-debug.apk
+```
+
