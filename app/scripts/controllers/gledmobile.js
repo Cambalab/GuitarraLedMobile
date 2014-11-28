@@ -8,9 +8,9 @@
 * Controller of gledmobile
 */
 
-angular.module('<%= appName %>.controllers',[]);
+angular.module('GLedMovile.controllers',[]);
 
-angular.module('<%= appName %>.controllers')
+angular.module('GLedMovile.controllers')
   .controller('GLedCtrl',function($scope, $ionicModal, $ionicLoading, $log, $cordovaBluetoothSerial) {
   $scope.bluetoothDevices = [];
   $log.debug($cordovaBluetoothSerial);

@@ -8,7 +8,7 @@
 * Controller of the todo
 */
 
-angular.module('<%= appName %>.controllers')
+angular.module('GLedMovile.controllers')
   .controller('SongCtrl',function($scope) {
     var file = "prueba.gp5";
     var title = file.replace(/\.[^/.]+$/, "");

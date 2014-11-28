@@ -1,6 +1,6 @@
 'use strict';
-angular.module('<%= appName %>.services', []);
-angular.module('<%= appName %>.services')
+angular.module('GLedMovile.services', []);
+angular.module('GLedMovile.services')
 .factory('ChordService', function(_) {
   
   var chords = [

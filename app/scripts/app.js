@@ -10,10 +10,10 @@
  */
 
 angular
-  .module('<%= appName %>', [
+  .module('GLedMovile', [
     'ionic',
-    '<%= appName %>.controllers',
-    '<%= appName %>.services',
+    'GLedMovile.controllers',
+    'GLedMovile.services',
     'pascalprecht.translate',
     'underscore',
     'ngStorage',

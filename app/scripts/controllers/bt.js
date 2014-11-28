@@ -8,7 +8,7 @@
 * Controller of the BluetoothSerial
 */
 
-angular.module('<%= appName %>.controllers')
+angular.module('GLedMovile.controllers')
   .controller('BtCtrl', function($scope, $localStorage, $cordovaBluetoothSerial) {
 
     $scope.devices = '';

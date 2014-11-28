@@ -8,7 +8,7 @@
 * Controller of the gledmobile
 */
 
-angular.module('<%= appName %>.controllers')
+angular.module('GLedMovile.controllers')
   .controller('ScalesCtrl',function($scope) {
 	  $scope.scales = [
                 { name: "C", abc: "|CEGc|", hex:"" }

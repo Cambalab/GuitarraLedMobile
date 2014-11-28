@@ -8,7 +8,7 @@
 * Controller of the gledmobile
 */
 
-angular.module('<%= appName %>.controllers')
+angular.module('GLedMovile.controllers')
   .controller('ChordsCtrl',function($scope, ChordService) {
 	  $scope.chords = ChordService.all();
   })
