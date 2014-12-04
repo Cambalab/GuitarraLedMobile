@@ -8,10 +8,10 @@
 * Controller of gledmobile
 */
 
-angular.module('GLedMovile.controllers',[]);
+angular.module('GLedMovile.controllers',['ngStorage']);
 
 angular.module('GLedMovile.controllers')
-  .controller('GLedCtrl',function($scope, $ionicModal, $ionicLoading, $log, $q, $cordovaBluetoothSerial, BluetoothService) {
+  .controller('GLedCtrl',function($scope, $ionicModal, $ionicLoading, $log, $q, $localStorage, $sessionStorage, $cordovaBluetoothSerial, BluetoothService) {
 
   $scope.bluetoothDevices = BluetoothService.devices
   $scope.conectarBluetooth = function(options) {
@@ -40,9 +40,45 @@ angular.module('GLedMovile.controllers')
   }
 
   $log.debug($cordovaBluetoothSerial);
+  $localStorage.$default({
+    guitars: {}
+  });
 
-  $scope.addGuitar = function() {
+  $scope.guitars = $localStorage.guitars;
 
+  $ionicModal.fromTemplateUrl('views/add-guitar.html', {scope: $scope}).then(function(modal) { $scope.addModal = modal});
+
+  $scope.noGuitars = function() {
+    return _.isEmpty($scope.guitars);
+  }
+
+  $scope.addGuitar = function(device) {
+    console.log('addGuitar() device: ', device, ' storage[id]: ', $scope.guitars[device.address]);
+    if ($scope.guitars[device.id] == undefined) {
+        $scope.conectarBluetooth({device: device}).then(function() {
+            device.alias = device.name;
+            $scope.guitars[device.address] = device;
+            $scope.closeAddGuitarModal();
+        });
+    } else {
+        $scope.closeAddGuitarModal();
+    }
+  }
+
+  $scope.isNewGuitar = function(device) {
+    return ($scope.guitars[device.address] == undefined);
+  }
+
+  $scope.removeGuitar = function(device) {
+    delete $scope.guitars[device.address];
+  }
+
+  $scope.showAddGuitarModal = function() {
+    $scope.addModal.show();
+  }
+
+  $scope.closeAddGuitarModal = function() {
+    $scope.addModal.hide();
   }
 
   });
