@@ -6,6 +6,7 @@ angular.module('GLedMovile.services')
   var bluetoothDevices = [];
   var conectado = false;
   var ledArray = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
+  var intervalID;
 
   function reloadBTDevices() {
     bluetoothSerial.list(function(devices) {
@@ -47,6 +48,9 @@ angular.module('GLedMovile.services')
         conectado = true;
         $rootScope.$apply();
         dfd.resolve(device);
+        //FIXME
+        intervalID = repeat(100);
+        $log.debug(intervalID);
       },
 
       function(err) {
@@ -72,12 +76,12 @@ angular.module('GLedMovile.services')
     );
   };
 
-// FIXME XXX XXX
     var toLedArray = function(position){
       ledArray = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
       for (var i = 0; i < position.length ; i++) {
-        ledArray[position[i].str-1] = parseInt(position[i].fret)
+        ledArray[position[i].str-1] = Math.pow(2,parseInt(position[i].fret));
       }
+      $log.debug(ledArray);
     }
 
     document.addEventListener('note', function (note) {
