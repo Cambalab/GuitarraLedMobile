@@ -27,6 +27,12 @@ angular.module('GLedMovile.services')
       id: "20:14:04:09:17:25",
       "class": 7936,
     });
+    bluetoothDevices.push({
+      name: "dummy BT device 2222",
+      address: "20:14:04:09:17:33",
+      id: "20:14:04:09:17:33",
+      "class": 7936,
+    });
   }
 
   var conectarBluetooth = function(options) {
