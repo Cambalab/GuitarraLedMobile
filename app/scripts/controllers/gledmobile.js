@@ -39,7 +39,6 @@ angular.module('GLedMovile.controllers')
     return dfd.promise;
   }
 
-  $log.debug($cordovaBluetoothSerial);
   $localStorage.$default({
     guitars: {}
   });
