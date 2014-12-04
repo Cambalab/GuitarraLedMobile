@@ -2,24 +2,19 @@
 <div class="list">
   <div class="item item-button-right" ng-repeat="guitar in guitars">
     {{guitar.alias}}
-    <button class="button button-positive" ng-click="removeGuitar($index)">
+    <button class="button button-positive" ng-click="removeGuitar(guitar)">
       <i class="icon ion-trash-b"></i>
     </button>
   </div>
 </div>
 
   <div class="card" >
-    <div class="item item-text-wrap" ng-show="!guitars.length">
-      <ion-list>
-          <ion-item nav-clear ng-repeat="device in bluetoothDevices" ng-click="conectarBluetooth({debug:false, device:device})">
-            {{ device.name }}
-          </ion-item>
-      </ion-list>
+    <div class="item item-text-wrap" ng-show="noGuitars()">
       <span>
-        {{ 'NO_GUITARS' | translate }}  <a href="javascript:" ng-click="addGuitar()">{{ 'HERE' | translate }}</a>
+        {{ 'NO_GUITARS' | translate }}  <a ng-click="showAddGuitarModal()">{{ 'HERE' | translate }}</a>
       </span>
     </div>
    </div>
    <a class="button icon ion-chevron-right" ui-sref="gledmobile.modes">{{ 'NEXT' | translate }}</a>
-          
+
 </ion-content>

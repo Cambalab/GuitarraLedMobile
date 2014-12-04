@@ -1,9 +1,13 @@
 <div class="modal slide-in-up">
   <ion-header-bar class="bar-secondary">
-    <button class="button button-clear button-positive" ng-click="closeAddGuitar()">{{ 'CANCEL' | translate }}</button>
+    <button class="button button-clear button-positive" ng-click="closeAddGuitarModal()">{{ 'CANCEL' | translate }}</button>
     <h1 class="title">{{ 'ADD_GUITAR' | translate }}</h1>
   </ion-header-bar>
   <ion-content class="">
-    Bluetooth
+      <ion-list>
+          <ion-item nav-clear ng-repeat="device in bluetoothDevices | filter:isNewGuitar" ng-click="addGuitar(device)">
+            {{ device.name }}
+          </ion-item>
+      </ion-list>
   </ion-content>
 </div>
