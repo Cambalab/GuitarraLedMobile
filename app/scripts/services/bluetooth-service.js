@@ -64,10 +64,10 @@ angular.module('GLedMovile.services')
 
     $cordovaBluetoothSerial.disconnect().then(
       function(success) {
-        console.log('Desconecto', success);
+        $log.debug('Desconecto', success);
       } ,
       function(fail) {
-        console.log('error', fail);
+        $log.debug('error', fail);
       }
     );
   };
@@ -82,7 +82,7 @@ angular.module('GLedMovile.services')
 
     document.addEventListener('note', function (note) {
       toLedArray(note.detail.current.position);
-      console.log(ledArray)
+      $log.debug(ledArray)
       }, false);
 
     var sendData = function(stringsData) {
