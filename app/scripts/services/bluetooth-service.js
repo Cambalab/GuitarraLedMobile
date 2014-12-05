@@ -5,6 +5,7 @@ angular.module('GLedMovile.services')
 
   var bluetoothDevices = [];
   var conectado = false;
+  var enabled = false;
   var ledArray = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
   var intervalID;
 
@@ -18,8 +19,25 @@ angular.module('GLedMovile.services')
     },function(a){$log.debug(a)});
   };
 
+  function checkBTEnabled() {
+      bluetoothSerial.isEnabled(function() {
+        if (!enabled) {
+            $rootScope.$broadcast('Bluetooth.Enabled');
+            enabled = true;
+$log.debug('bt enabled');
+        }
+      }, function() {
+        if (enabled) {
+            enabled = false;
+            $rootScope.$broadcast('Bluetooth.Disabled');
+$log.debug('bt DISabled');
+        }
+      });
+  };
+
   if (ionic.Platform.isAndroid()) {
     setInterval(reloadBTDevices, 2000);
+    setInterval(checkBTEnabled, 2000);
   } else {
     bluetoothDevices.push({
       name: "dummy BT device",
@@ -54,12 +72,15 @@ angular.module('GLedMovile.services')
         conectado = true;
         $rootScope.$apply();
         dfd.resolve(device);
+        $rootScope.$broadcast('Bluetooth.Connected', device);
       },
 
       function(err) {
         $log.debug('bluetooth connect error: ', err);
         conectado = false;
+        $rootScope.$apply();
         dfd.reject({device:device, error:err});
+        $rootScope.$broadcast('Bluetooth.ConnectError', device, err);
       }
     );
 
@@ -69,15 +90,22 @@ angular.module('GLedMovile.services')
 
   var desconectarBluetooth = function() {
     conectado = false;
+    var dfd = $q.defer();
 
     $cordovaBluetoothSerial.disconnect().then(
       function(success) {
         $log.debug('Desconecto', success);
+        $rootScope.$broadcast('Bluetooth.Disconnected');
+        dfd.resolve();
       } ,
       function(fail) {
         $log.debug('error', fail);
+        $rootScope.$broadcast('Bluetooth.Disconnected', fail);
+        dfd.resolve();
       }
     );
+
+    return dfd.promise;
   };
 
     var toLedArray = function(position){
@@ -107,5 +135,7 @@ angular.module('GLedMovile.services')
     devices: bluetoothDevices,
     conectar: conectarBluetooth,
     desconectar: desconectarBluetooth,
+    conectado: conectado,
+    enabled: enabled,
   }
   });
