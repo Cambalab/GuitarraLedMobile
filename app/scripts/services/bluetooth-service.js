@@ -54,7 +54,6 @@ angular.module('GLedMovile.services')
         conectado = true;
         $rootScope.$apply();
         dfd.resolve(device);
-        $log.debug(intervalID);
       },
 
       function(err) {
@@ -86,23 +85,21 @@ angular.module('GLedMovile.services')
       for (var i = 0; i < position.length ; i++) {
         ledArray[position[i].str-1] = Math.pow(2,parseInt(position[i].fret));
       }
-      $log.debug(ledArray);
     }
 
     document.addEventListener('note', function (note) {
       toLedArray(note.detail.current.position);
-      $log.debug(ledArray)
       sendData(ledArray);
       }, false);
 
     var sendData = function(stringsData) {
       if(conectado){
           bluetoothSerial.write('N');
-  		    for (var i = stringsData.length-1; i >= 0 ; i--) {
+          for (var i = stringsData.length-1; i >= 0 ; i--) {
             bluetoothSerial.write(String.fromCharCode((stringsData[i]>>16) & 0xff));
-	          bluetoothSerial.write(String.fromCharCode((stringsData[i]>>8) & 0xff));
-			      bluetoothSerial.write(String.fromCharCode(stringsData[i] & 0xff));
-		      }
+            bluetoothSerial.write(String.fromCharCode((stringsData[i]>>8) & 0xff));
+            bluetoothSerial.write(String.fromCharCode(stringsData[i] & 0xff));
+          }
       }
     };
 
