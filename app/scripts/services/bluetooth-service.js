@@ -61,6 +61,7 @@ angular.module('GLedMovile.services')
 
       function(err) {
         $log.debug('bluetooth connect error: ', err);
+        conectado = false;
         dfd.reject({device:device, error:err});
       }
     );
