@@ -8,11 +8,12 @@
   </div>
 </div>
 
-  <div class="card" >
-    <div class="item item-text-wrap" ng-show="noGuitars()">
-      <span>
-        {{ 'NO_GUITARS' | translate }}  <a ng-click="showAddGuitarModal()">{{ 'HERE' | translate }}</a>
-      </span>
+  <div class="card" ng-show="noGuitars()">
+    <div class="item item-divider">
+        {{ 'NO_GUITARS' | translate }}
+    </div>
+    <div class="item item-text-wrap">
+        <button class="button button-positive button-full" ng-click="showAddGuitarModal()"> {{ 'ADD_GUITAR' | translate }} </button>
     </div>
    </div>
    <a class="button icon ion-chevron-right" ui-sref="gledmobile.modes">{{ 'NEXT' | translate }}</a>
