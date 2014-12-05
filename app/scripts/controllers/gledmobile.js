@@ -22,19 +22,26 @@ angular.module('GLedMovile.controllers')
       template: 'Conectando a ' + device.name + ' ...',
     });
 
-
-    BluetoothService.conectar(options)
-    .then( function(device) {
-      $ionicLoading.hide();
-      dfd.resolve(device);
-    })
-    .catch( function(device, err) {
+    function __err_handler(err) {
       $ionicLoading.show({
         template: 'Bluetooth error: ' + err,
         duration: 1500,
       });
       dfd.reject(device, err);
-    });
+    }
+
+    try {
+        BluetoothService.conectar(options)
+        .then( function(device) {
+          $ionicLoading.hide();
+          dfd.resolve(device);
+        })
+        .catch( function(args) {
+            __err_handler(args.error);
+        });
+    } catch (err) {
+        __err_handler(err);
+    }
 
     return dfd.promise;
   }
