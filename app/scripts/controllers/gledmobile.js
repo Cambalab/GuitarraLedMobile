@@ -87,4 +87,8 @@ angular.module('GLedMovile.controllers')
     $scope.addModal.hide();
   }
 
+  $scope.connectToGuitar = function(guitar) {
+    $scope.conectarBluetooth({device: guitar});
+  }
+
   });

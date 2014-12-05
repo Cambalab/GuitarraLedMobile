@@ -1,6 +1,6 @@
 <ion-content class="has-header padding" has-tabs="true">
 <div class="list">
-  <div class="item item-button-right" ng-repeat="guitar in guitars">
+  <div class="item item-button-right" ng-repeat="guitar in guitars" ng-click="connectToGuitar(guitar)">
     {{guitar.alias}}
     <button class="button button-positive" ng-click="removeGuitar(guitar)">
       <i class="icon ion-trash-b"></i>
