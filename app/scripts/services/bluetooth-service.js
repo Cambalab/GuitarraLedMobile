@@ -54,8 +54,6 @@ angular.module('GLedMovile.services')
         conectado = true;
         $rootScope.$apply();
         dfd.resolve(device);
-        //FIXME
-        intervalID = repeat(100);
         $log.debug(intervalID);
       },
 
@@ -94,6 +92,7 @@ angular.module('GLedMovile.services')
     document.addEventListener('note', function (note) {
       toLedArray(note.detail.current.position);
       $log.debug(ledArray)
+      sendData(ledArray);
       }, false);
 
     var sendData = function(stringsData) {
@@ -105,12 +104,6 @@ angular.module('GLedMovile.services')
 			      bluetoothSerial.write(String.fromCharCode(stringsData[i] & 0xff));
 		      }
       }
-    };
-
-    var repeat = function(mills) {
-      setInterval(function() {
-        sendData(ledArray);
-      }, mills);
     };
 
   return {
