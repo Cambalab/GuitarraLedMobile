@@ -5,7 +5,7 @@
     <input ng-model="search" placeholder="{{ 'SEARCH' | translate }}">
   </label>
 
-  <div ng-controller="ScalesCtrl" class="list card">
+  <div class="list card">
     <ul>
       <li ng-repeat="scale in scales | filter:search">
         <a href="#" class="item item-icon-left">

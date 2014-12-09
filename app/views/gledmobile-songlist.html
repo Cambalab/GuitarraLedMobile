@@ -5,7 +5,7 @@
     <input ng-model="search" placeholder="{{ 'SEARCH' | translate }}">
   </label>
 
-  <div ng-controller="SongsCtrl" class="list card">
+  <div class="list card">
     <ul>
       <li ng-repeat="song in songs | filter:search">
         <a ui-sref="gledmobile.song" class="item item-icon-left">

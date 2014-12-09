@@ -5,7 +5,7 @@
     <input ng-model="search" placeholder="{{ 'SEARCH' | translate }}">
   </label>
 
-  <div ng-controller="ChordsCtrl" class="list card">
+  <div class="list card">
     <ul>
       <li ng-repeat="chord in chords | filter:search">
         <a ui-sref="gledmobile.chord-display({chordName: chord.name})" class="item item-icon-left">
