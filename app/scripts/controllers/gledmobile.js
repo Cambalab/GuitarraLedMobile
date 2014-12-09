@@ -96,4 +96,10 @@ angular.module('GLedMovile.controllers')
     });
   }
 
+  $scope.$on('Bluetooth.Enabled', function() {
+    if (_.size($scope.guitars) == 1) {
+      $scope.connectToGuitar(_.values($scope.guitars)[0]);
+    }
+  });
+
   });
