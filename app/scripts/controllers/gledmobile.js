@@ -11,9 +11,9 @@
 angular.module('GLedMovile.controllers',['ngStorage']);
 
 angular.module('GLedMovile.controllers')
-  .controller('GLedCtrl',function($scope, $state, $ionicModal, $ionicLoading, $log, $q, $localStorage, $sessionStorage, $cordovaBluetoothSerial, BluetoothService) {
+  .controller('GLedCtrl',function($scope, $state, $ionicModal, $ionicLoading, $log, $q, $localStorage, $sessionStorage, BluetoothService) {
 
-  $scope.bluetoothDevices = BluetoothService.devices
+  $scope.bluetoothDevices = BluetoothService.devices;
   $scope.conectarBluetooth = function(options) {
     var device = options.device;
     var dfd = $q.defer()
@@ -59,7 +59,6 @@ angular.module('GLedMovile.controllers')
   }
 
   $scope.addGuitar = function(device) {
-    console.log('addGuitar() device: ', device, ' storage[id]: ', $scope.guitars[device.address]);
     if ($scope.guitars[device.id] == undefined) {
         $scope.conectarBluetooth({device: device}).then(function() {
             device.alias = device.name;
