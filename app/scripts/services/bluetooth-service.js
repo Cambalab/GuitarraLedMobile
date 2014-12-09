@@ -73,7 +73,6 @@ $log.debug('bt DISabled');
       function() {
         $log.debug('bluetooth connect OK   : ', device.name, ' ', arguments);
         __bts.conectado = true;
-        $rootScope.$apply();
         dfd.resolve(device);
         $rootScope.$broadcast('Bluetooth.Connected', device);
       },
@@ -81,7 +80,6 @@ $log.debug('bt DISabled');
       function(err) {
         $log.debug('bluetooth connect error: ', err);
         __bts.conectado = false;
-        $rootScope.$apply();
         dfd.reject({device:device, error:err});
         $rootScope.$broadcast('Bluetooth.ConnectError', device, err);
       }
