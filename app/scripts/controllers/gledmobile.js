@@ -89,8 +89,10 @@ angular.module('GLedMovile.controllers')
   }
 
   $scope.connectToGuitar = function(guitar) {
-    $scope.conectarBluetooth({device: guitar}).then(function() {
-        $state.go('gledmobile.modes');
+    BluetoothService.desconectar().then(function() {
+      $scope.conectarBluetooth({device: guitar}).then(function() {
+          $state.go('gledmobile.modes');
+      });
     });
   }
 
