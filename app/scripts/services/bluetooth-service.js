@@ -5,7 +5,6 @@ angular.module('GLedMovile.services')
 
   var bluetoothDevices = [];
   var ledArray = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
-  var intervalID;
 
   var __bts = {
     devices: bluetoothDevices,
