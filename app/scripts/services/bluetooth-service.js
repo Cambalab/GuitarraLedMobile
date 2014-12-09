@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('GLedMovile.services')
-.factory('BluetoothService', function(_, $q, $cordovaBluetoothSerial, $log, $rootScope, $ionicLoading) {
+.factory('BluetoothService', function(_, $q, $interval, $cordovaBluetoothSerial, $log, $rootScope, $ionicLoading) {
 
   var bluetoothDevices = [];
   var conectado = false;
@@ -15,15 +15,14 @@ angular.module('GLedMovile.services')
       devices.forEach(function(dev) {
         bluetoothDevices.push(dev);
       });
-      $rootScope.$apply();
     },function(a){$log.debug(a)});
   };
 
   function checkBTEnabled() {
       bluetoothSerial.isEnabled(function() {
         if (!enabled) {
-            $rootScope.$broadcast('Bluetooth.Enabled');
             enabled = true;
+            $rootScope.$broadcast('Bluetooth.Enabled');
 $log.debug('bt enabled');
         }
       }, function() {
@@ -36,8 +35,8 @@ $log.debug('bt DISabled');
   };
 
   if (ionic.Platform.isAndroid()) {
-    setInterval(reloadBTDevices, 2000);
-    setInterval(checkBTEnabled, 2000);
+    $interval(reloadBTDevices, 2000);
+    $interval(checkBTEnabled, 2000);
   } else {
     bluetoothDevices.push({
       name: "dummy BT device",
