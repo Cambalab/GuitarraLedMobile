@@ -18,6 +18,7 @@ var translationsEN = {
   SCALES: 'Scales',
   SONGS: 'Songs',
   SEARCH: 'Search',
+  BLUETOOTH_DISABLED: 'Bluetooth is disabled',
 };
 
 var translationsES = {
@@ -40,6 +41,7 @@ var translationsES = {
   SCALES: 'Escalas',
   SONGS: 'Canciones',
   SEARCH: 'Buscar',
+  BLUETOOTH_DISABLED: 'Bluetooth está deshabilitado',
 };
 
 

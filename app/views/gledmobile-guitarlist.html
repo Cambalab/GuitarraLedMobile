@@ -1,4 +1,5 @@
 <ion-content class="has-header padding" has-tabs="true">
+<div ng-show="Bluetooth.enabled">
 <div class="list">
   <div class="item item-button-right" ng-repeat="guitar in guitars" ng-click="connectToGuitar(guitar)">
     {{guitar.alias}}
@@ -17,5 +18,10 @@
     </div>
    </div>
    <a class="button icon ion-chevron-right" ui-sref="gledmobile.modes">{{ 'NEXT' | translate }}</a>
+</div>
+
+<div ng-hide="Bluetooth.enabled" class="item-divider assertive">
+        {{ 'BLUETOOTH_DISABLED' | translate }}
+</div>
 
 </ion-content>
