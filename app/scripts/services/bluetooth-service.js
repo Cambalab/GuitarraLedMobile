@@ -4,10 +4,14 @@ angular.module('GLedMovile.services')
 .factory('BluetoothService', function(_, $q, $interval, $cordovaBluetoothSerial, $log, $rootScope, $ionicLoading) {
 
   var bluetoothDevices = [];
-  var conectado = false;
-  var enabled = false;
   var ledArray = [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000];
   var intervalID;
+
+  var __bts = {
+    devices: bluetoothDevices,
+    conectado: false,
+    enabled: false,
+  }
 
   function reloadBTDevices() {
     bluetoothSerial.list(function(devices) {
@@ -20,14 +24,14 @@ angular.module('GLedMovile.services')
 
   function checkBTEnabled() {
       bluetoothSerial.isEnabled(function() {
-        if (!enabled) {
-            enabled = true;
+        if (!__bts.enabled) {
+            __bts.enabled = true;
             $rootScope.$broadcast('Bluetooth.Enabled');
 $log.debug('bt enabled');
         }
       }, function() {
-        if (enabled) {
-            enabled = false;
+        if (__bts.enabled) {
+            __bts.enabled = false;
             $rootScope.$broadcast('Bluetooth.Disabled');
 $log.debug('bt DISabled');
         }
@@ -62,13 +66,13 @@ $log.debug('bt DISabled');
 
     var device = options.device;
 
-    conectado = false;
+    __bts.conectado = false;
     bluetoothSerial.disconnect();
 
     bluetoothSerial.connect(device.address,
       function() {
         $log.debug('bluetooth connect OK   : ', device.name, ' ', arguments);
-        conectado = true;
+        __bts.conectado = true;
         $rootScope.$apply();
         dfd.resolve(device);
         $rootScope.$broadcast('Bluetooth.Connected', device);
@@ -76,7 +80,7 @@ $log.debug('bt DISabled');
 
       function(err) {
         $log.debug('bluetooth connect error: ', err);
-        conectado = false;
+        __bts.conectado = false;
         $rootScope.$apply();
         dfd.reject({device:device, error:err});
         $rootScope.$broadcast('Bluetooth.ConnectError', device, err);
@@ -88,7 +92,7 @@ $log.debug('bt DISabled');
 
 
   var desconectarBluetooth = function() {
-    conectado = false;
+    __bts.conectado = false;
     var dfd = $q.defer();
 
     $cordovaBluetoothSerial.disconnect().then(
@@ -120,7 +124,7 @@ $log.debug('bt DISabled');
       }, false);
 
     var sendData = function(stringsData) {
-      if(conectado){
+      if(__bts.conectado){
           bluetoothSerial.write('N');
           for (var i = stringsData.length-1; i >= 0 ; i--) {
             bluetoothSerial.write(String.fromCharCode((stringsData[i]>>16) & 0xff));
@@ -130,11 +134,7 @@ $log.debug('bt DISabled');
       }
     };
 
-  return {
-    devices: bluetoothDevices,
-    conectar: conectarBluetooth,
-    desconectar: desconectarBluetooth,
-    conectado: conectado,
-    enabled: enabled,
-  }
+  __bts.conectar = conectarBluetooth;
+  __bts.desconectar = desconectarBluetooth;
+  return __bts;
   });
