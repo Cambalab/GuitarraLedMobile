@@ -109,7 +109,6 @@ angular
         views: {
           'gledmobile-about': {
             templateUrl: 'views/gledmobile-about.html',
-            controller: 'BtCtrl'
           }
         }
       });
