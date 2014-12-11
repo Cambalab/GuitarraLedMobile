@@ -14,5 +14,4 @@ angular.module('GLedMovile.controllers')
   })
   .controller('ChordDisplayCtrl', function($scope, $stateParams, ChordService) {
     $scope.chord = ChordService.get($stateParams.chordName);
-    jtab.render($('.jtab'),$stateParams.chordName);
   });
