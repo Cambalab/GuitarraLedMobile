@@ -6,3 +6,8 @@
   width: 96px;
   height: 96px;
 }
+
+.jtab {
+  display: table;
+  margin:  0 auto;
+}
