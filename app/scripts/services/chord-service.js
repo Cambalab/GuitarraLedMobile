@@ -3,7 +3,10 @@ angular.module('GLedMovile.services', []);
 angular.module('GLedMovile.services')
 .factory('ChordService', function(_) {
   
-  var chords = [
+  var roots = "CDEFGAB";
+  var allChords = {};
+
+  var simpleChords = [
     { name: "C", abc: "|CEGc|", hex:"" },
     { name: "D", abc: "", hex:"" },
     { name: "E", abc: "", hex:"" },
@@ -25,12 +28,15 @@ angular.module('GLedMovile.services')
     { name: "A#", abc: "", hex:"" }
   ];
 
+  var __alljtChords = _.keys(jtab.Chords);
+
+  allChords = _.groupBy(__alljtChords, function(chordname) { return chordname[0]; });
+
   return {
-    all: function() {
-      return chords;
-    },
+    all: allChords,
     get: function(chordName) {
-      return _.findWhere(chords,{name:chordName});
-    }
+      return _.findWhere(simpleChords,{name:chordName});
+    },
+    roots: roots,
   };
 });
