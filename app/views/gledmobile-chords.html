@@ -4,7 +4,7 @@
   <div class="row">
     <label class="col item item-input item-select">
        <div class="input-label">
-         Root
+         {{ 'ROOT' | translate }}
        </div>
        <select ng-model="selectedRoot" ng-options="root for root in roots" ng-change="onRootChange(selectedRoot)">
        </select>
@@ -12,7 +12,7 @@
 
   <label class="col item item-input item-select">
        <div class="input-label">
-         Chord
+         {{ 'CHORD' | translate }}
        </div>
        <select ng-model="selectedChord" ng-options="chord for chord in chords[selectedRoot]">
        </select>
