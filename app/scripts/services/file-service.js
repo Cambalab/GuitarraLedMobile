@@ -3,8 +3,11 @@
 angular.module('GLedMovile.services')
 .factory('FileService', function(_, $q,$window, $cordovaFile, $log,$ionicPlatform) {
   var fileService = {};
+  var platform = $ionicPlatform;
   $ionicPlatform.ready(function() {
-  window.resolveLocalFileSystemURL($cordovaFile.applicationDirectory + "www/index.html", gotFile, fail);
+    if(ionic.Platform.isAndroid()){
+      window.resolveLocalFileSystemURL($cordovaFile.externalRootDirectory + "guitarraledmobile/tabs", gotFile, fail);
+    }
   })
   
   fileService.listTablatures = function(){

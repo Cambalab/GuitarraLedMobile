@@ -17,7 +17,9 @@ angular.module('GLedMovile.controllers')
   $scope.Bluetooth = BluetoothService;
 
   // Probando file service
+  
   FileService.listTablatures();
+  
   //
   $scope.conectarBluetooth = function(options) {
     var device = options.device;
