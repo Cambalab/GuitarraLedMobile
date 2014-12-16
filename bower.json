@@ -5,7 +5,7 @@
   "license": "agplv3",
   "author": "Crear Arte y Tecnología <crear@elarteylatecnologia.com.ar>",
   "dependencies": {
-    "vexPlayer": "git://github.com/FacundoMainere/HTML5-Guitar-Tab-Player",
+    "vexPlayer": "git://github.com/CrearAyT/HTML5-Guitar-Tab-Player",
     "alphatab": "git://github.com/CoderLine/alphaTab",
     "ionic": "v1.0.0-beta.8",
     "angular-translate": "~2.2.0",
