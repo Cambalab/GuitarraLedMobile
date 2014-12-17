@@ -34,15 +34,14 @@ angular.module('GLedMovile.services')
 
   var chordNameToPositions = function(chordName) {
     var positions = [];
+    var chord = new jtabChord(chordName);
 
-    if (!_.has(jtab.Chords, chordName)) {
+    if (!chord.isValid) {
       return positions;
     }
 
-    var _chord = jtab.Chords[chordName][0];
-    var baseFret = _chord[0];
+    var _chord = _.rest(chord.chordArray, 1);
 
-    _chord = _.rest(_chord, 1);
     _.each(_chord, function(fpos, string) {
       var string = 6 - string;  // de 1 a 6 pero en orden reverso.
       var fret = fpos[0];
@@ -51,7 +50,6 @@ angular.module('GLedMovile.services')
         return;
       }
 
-      fret = fret + baseFret;
       positions.push({fret:fret, str:string});
     });
     return positions;
