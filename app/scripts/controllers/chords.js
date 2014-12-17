@@ -10,23 +10,40 @@
 
 angular.module('GLedMovile.controllers')
   .controller('ChordsCtrl',function($scope, ChordService) {
+
     $scope.chords = ChordService.all;
     $scope.roots  = ChordService.roots;
 
-    $scope.selectedRoot = $scope.roots[0];
-    $scope.selectedChord = $scope.chords[$scope.selectedRoot][0];
-
-    $scope.onRootChange = function(root) {
-      $scope.selectedChord = $scope.chords[root][0];
+    var model = {
+      selectedRoot: $scope.roots[0],
+      selectedChord: $scope.chords[$scope.roots[0]][0],
+      variation: 1,
     }
+    $scope.model = model;
 
-    $scope.$watch('selectedChord', function(newValue, oldValue) {
-      var positions = ChordService.chordNameToPositions(newValue);
+    function __sendNotesToGuitar(positions) {
       var payload = { 'detail': { 'current': { 'position': positions }}};
       var ev = new CustomEvent('note', payload);
 
       document.dispatchEvent(ev);
+    }
+
+    $scope.onRootChange = function(root) {
+      model.variation = 1;
+      model.selectedChord = $scope.chords[root][0];
+    }
+
+    $scope.onChordChange = function(root) {
+      model.variation = 1;
+    }
+
+    $scope.$watch(function() {
+        return model.selectedChord + ':' + model.variation;
+    }, function(newValue, oldValue) {
+        var positions = ChordService.chordNameToPositions(newValue);
+        __sendNotesToGuitar(positions);
     });
+
   })
   .controller('ChordDisplayCtrl', function($scope, $stateParams, ChordService) {
     $scope.chord = ChordService.get($stateParams.chordName);
