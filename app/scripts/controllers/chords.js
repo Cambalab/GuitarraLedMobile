@@ -44,6 +44,27 @@ angular.module('GLedMovile.controllers')
         __sendNotesToGuitar(positions);
     });
 
+    $scope.variacionArriba = function() {
+        var variation = model.variation + 1;
+        var positions = ChordService.chordNameToPositions(model.selectedChord + ':' + variation);
+
+        for (var idx in positions) {
+            var pos = positions[idx];
+            // Si la variacion usa trastes que no podemos mostrar con la guitarra paramos.
+            if (pos.fret > 18) {
+                return;
+            }
+        }
+
+        model.variation += 1;
+    }
+
+    $scope.variacionAbajo = function() {
+        if (model.variation > 1) {
+            model.variation -= 1;
+        }
+    }
+
   })
   .controller('ChordDisplayCtrl', function($scope, $stateParams, ChordService) {
     $scope.chord = ChordService.get($stateParams.chordName);

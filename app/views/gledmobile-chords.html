@@ -17,6 +17,12 @@
        <select ng-model="model.selectedChord" ng-options="chord for chord in chords[model.selectedRoot]" ng-change="onChordChange(model.selectedChord)">
        </select>
     </label>
+
+  <div class="col item">
+    <button class="button button-positive icon-left ion-arrow-left-c" ng-click="variacionAbajo()"></button>
+    <button class="button button-positive icon-right ion-arrow-right-c" ng-click="variacionArriba()"></button>
+  </div>
+
   </div>
 
   <div class="jtab" j-tab chord="model.selectedChord + ':' + model.variation"></div>
