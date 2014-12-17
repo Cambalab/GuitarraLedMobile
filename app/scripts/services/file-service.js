@@ -3,7 +3,7 @@
 angular.module('GLedMovile.services')
 .factory('FileService', function(_, $q,$window, $cordovaFile, $log,$ionicPlatform,$rootScope) {
   var fileService = {};
-  var tabList;
+  var tabList = [];
   $ionicPlatform.ready(function() {
     if(ionic.Platform.isAndroid()){
      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFSSuccess, FileError);
@@ -20,7 +20,7 @@ angular.module('GLedMovile.services')
   }
 
   function gotFiles(entries) {
-    tabList = [];
+    tabList.length = 0;
     for(var i=0,len=entries.length; i<len; i++){
       tabList.push(entries[i].name);
     }
