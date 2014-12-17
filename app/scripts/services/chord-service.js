@@ -3,7 +3,10 @@ angular.module('GLedMovile.services', []);
 angular.module('GLedMovile.services')
 .factory('ChordService', function(_) {
   
-  var chords = [
+  var roots = "CDEFGAB";
+  var allChords = {};
+
+  var simpleChords = [
     { name: "C", abc: "|CEGc|", hex:"" },
     { name: "D", abc: "", hex:"" },
     { name: "E", abc: "", hex:"" },
@@ -25,12 +28,41 @@ angular.module('GLedMovile.services')
     { name: "A#", abc: "", hex:"" }
   ];
 
-  return {
-    all: function() {
-      return chords;
-    },
-    get: function(chordName) {
-      return _.findWhere(chords,{name:chordName});
+  var __alljtChords = _.keys(jtab.Chords);
+
+  allChords = _.groupBy(__alljtChords, function(chordname) { return chordname[0]; });
+
+  var chordNameToPositions = function(chordName) {
+    var positions = [];
+
+    if (!_.has(jtab.Chords, chordName)) {
+      return positions;
     }
+
+    var _chord = jtab.Chords[chordName][0];
+    var baseFret = _chord[0];
+
+    _chord = _.rest(_chord, 1);
+    _.each(_chord, function(fpos, string) {
+      var string = 6 - string;  // de 1 a 6 pero en orden reverso.
+      var fret = fpos[0];
+
+      if (fret == -1) {
+        return;
+      }
+
+      fret = fret + baseFret;
+      positions.push({fret:fret, str:string});
+    });
+    return positions;
+  }
+
+  return {
+    all: allChords,
+    get: function(chordName) {
+      return _.findWhere(simpleChords,{name:chordName});
+    },
+    roots: roots,
+    chordNameToPositions: chordNameToPositions,
   };
 });

@@ -14,6 +14,7 @@ angular
     'ionic',
     'GLedMovile.controllers',
     'GLedMovile.services',
+    'GLedMovile.directives',
     'pascalprecht.translate',
     'underscore',
     'ngStorage',
