@@ -1,36 +1,38 @@
 'use strict';
 
 angular.module('GLedMovile.services')
-.factory('FileService', function(_, $q,$window, $cordovaFile, $log,$ionicPlatform) {
+.factory('FileService', function(_, $q,$window, $cordovaFile, $log,$ionicPlatform,$rootScope) {
   var fileService = {};
-  var platform = $ionicPlatform;
+  var tabList;
   $ionicPlatform.ready(function() {
     if(ionic.Platform.isAndroid()){
-      window.resolveLocalFileSystemURL($cordovaFile.externalRootDirectory + "guitarraledmobile/tabs", gotFile, fail);
+     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFSSuccess, FileError);
     }
   })
-  
+
+  function onFSSuccess(fileSystem) {
+    fileSystem.root.getDirectory("guitarraledmobile/tabs/", {create: false, exclusive: false}, doDirectoryListing, FileError);
+  }
+
+  function doDirectoryListing(dirEntry) {
+    var directoryReader = dirEntry.createReader();
+    directoryReader.readEntries(gotFiles, FileError);
+  }
+
+  function gotFiles(entries) {
+    tabList = [];
+    for(var i=0,len=entries.length; i<len; i++){
+      tabList.push(entries[i].name);
+    }
+    $rootScope.$apply();
+  }
+ 
+  function FileError(e) {
+    $log.error(e);
+  }
+
   fileService.listTablatures = function(){
-    $log.debug($cordovaFile);
-  }
-  
-  function fail(e) {
-	$log.debug("FileSystem Error");
-	$log.error(e);
-  }
-
-  function gotFile(fileEntry) {
-
-	fileEntry.file(function(file) {
-		var reader = new FileReader();
-
-		reader.onloadend = function(e) {
-			$log.debug("Text is: "+this.result);
-			document.querySelector("#textArea").innerHTML = this.result;
-		}
-
-		reader.readAsText(file);
-	});
+    return tabList;
   }
   
   return fileService;

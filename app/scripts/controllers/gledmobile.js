@@ -11,16 +11,10 @@
 angular.module('GLedMovile.controllers',['ngStorage']);
 
 angular.module('GLedMovile.controllers')
-  .controller('GLedCtrl',function($scope, $state, $ionicModal, $ionicLoading, $log, $q, $localStorage, $sessionStorage, BluetoothService,FileService) {
+  .controller('GLedCtrl',function($scope, $state, $ionicModal, $ionicLoading, $log, $q, $localStorage, $sessionStorage, BluetoothService) {
 
   $scope.bluetoothDevices = BluetoothService.devices;
   $scope.Bluetooth = BluetoothService;
-
-  // Probando file service
-  
-  FileService.listTablatures();
-  
-  //
   $scope.conectarBluetooth = function(options) {
     var device = options.device;
     var dfd = $q.defer()
