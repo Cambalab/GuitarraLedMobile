@@ -9,12 +9,11 @@
 */
 
 angular.module('GLedMovile.controllers')
-  .controller('SongCtrl',function($scope) {
-    var file = "prueba.gp5";
+  .controller('SongCtrl',function($scope,$stateParams) {
+    var file = $stateParams.songLocation;
     var title = file.replace(/\.[^/.]+$/, "");
-    var score = alphatab.importer.ScoreLoader.loadScoreAsync(file,function(score) {
+    var score = alphatab.importer.ScoreLoader.loadScoreAsync("prueba.gp5",function(score) {
       $scope.song = toJson(score);
-      console.log($scope.song);
       var song = {
         "title": title,
         "artist": $scope.song.artist,
@@ -128,7 +127,6 @@ function toJson(score) {
         json.masterBars.push({
             timeSignatureNumerator: masterBar.timeSignatureNumerator,
             timeSignatureDenominator: masterBar.timeSignatureDenominator,
-            // .. and the rest of the properties
         });
     }
 
@@ -137,8 +135,6 @@ function toJson(score) {
         var track = score.tracks[t];
         var trackJson = {
             name: track.name,
-            // .. and the rest of the properties
-
             bars: []
         };
         json.tracks.push(trackJson);
@@ -147,7 +143,6 @@ function toJson(score) {
             var bar = track.bars[b];
             var barJson = {
                 clef: bar.clef,
-                // .. and the rest of the properties
                 voices: []
             };
             trackJson.bars.push(barJson);
@@ -168,7 +163,6 @@ function toJson(score) {
                     var beatJson = {
                         isEmpty: beat.isEmpty,
                         duration: beat.duration,
-                        // .. and the rest of the properties
                         notes: []
                     };
                     voiceJson.beats.push(beatJson);
@@ -179,7 +173,6 @@ function toJson(score) {
                         var noteJson = {
                             fret: note.fret,
                             string: note.string
-                            // // .. and the rest of the properties
                         };
                         beatJson.notes.push(noteJson);
                     } // Notes
