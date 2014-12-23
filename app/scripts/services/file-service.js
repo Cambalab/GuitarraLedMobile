@@ -4,7 +4,7 @@ angular.module('GLedMovile.services')
 .factory('FileService', function(_, $q,$window, $cordovaFile, $log,$ionicPlatform,$rootScope) {
   var fileService = {};
   var tabList = [];
-  var requestedFile;
+  var requestedFile = "";
   read(dirOnFSSuccess);
 
   function read(fsCallback){
@@ -15,17 +15,24 @@ angular.module('GLedMovile.services')
     })
   }
   
-  function fileOnFSSuccess(fileName,fileSystem){
-    fileSystem.root.getFile("guitarraledmobile/tabs/"+fileName,{create:false},saveFile,FileError);
+  function fileOnFSSuccess(fileName,fileSystem,dfd){
+    fileSystem.root.getFile("guitarraledmobile/tabs/"+fileName,{create:false},_.partial(saveFile,dfd),_.partial(FileError,_,dfd));
   }
   
   function dirOnFSSuccess(fileSystem) {
     fileSystem.root.getDirectory("guitarraledmobile/tabs/", {create: true, exclusive: false}, doDirectoryListing, FileError);
   }
   
-  function saveFile(file){
-    requestedFile = file;
-    $rootScope.$apply();
+  function saveFile(dfd,fileEntry){
+    var reader = new FileReader();
+    reader.onload = function() {
+      var generatedBuffer = reader.result;
+      dfd.resolve(generatedBuffer);
+    };
+    
+    fileEntry.file(function(file){
+      reader.readAsText(file);
+    });
   }
   
   function doDirectoryListing(dirEntry) {
@@ -41,7 +48,10 @@ angular.module('GLedMovile.services')
     $rootScope.$apply();
   }
  
-  function FileError(e) {
+  function FileError(e,dfd) {
+    if(!_.isUndefined(dfd)){
+      dfd.reject(e);
+    }
     $log.error(e);
   }
 
@@ -50,8 +60,9 @@ angular.module('GLedMovile.services')
   }
 
   fileService.getFile = function(file){
-    read(_.partial(fileOnFSSuccess,file));
-    return requestedFile;
+    var deferred = $q.defer();
+    read(_.partial(fileOnFSSuccess,file,_,deferred));
+    return deferred.promise;
   }
   
   return fileService;

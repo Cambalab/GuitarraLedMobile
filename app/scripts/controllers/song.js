@@ -9,31 +9,49 @@
 */
 
 angular.module('GLedMovile.controllers')
-  .controller('SongCtrl',function($scope,$stateParams,FileService) {
+  .controller('SongCtrl',function($scope,$stateParams,FileService,$log) {
     var file = $stateParams.songName;
     var title = file.replace(/\.[^/.]+$/, "");
-    var score = alphatab.importer.ScoreLoader.loadScoreFromBytes(FileService.getFile(file));
-    $scope.song = toJson(score);
-    var song = {
-      "title": title,
-      "artist": $scope.song.artist,
-      "timeSignature": [4, 4],
-      "tempo": 80,
-      "vexTabCode": [toVexTabCode($scope.song)]
-    };
-    
-    var $tab = $('#tab'),
-      tabCode = "",
-      tabLineCount = song.vexTabCode.length,
-      i;
-
-    for (i = 0; i < tabLineCount; i++) {
-      tabCode += song.vexTabCode[i] + "\n";
-    }
-
-    $tab.empty().append(tabCode);
-    var tabDiv = new Vex.Flow.TabDiv("#tab");
-    var player = new TabPlayer({ 'tabDiv': tabDiv, 'tempo': 60 });
+    var bytes;
+    FileService.getFile(file).then(function(data){
+      bytes = haxe.io.Bytes.ofString(data);
+      //MISTERIO
+      var loader = (alphatab.Environment.fileLoaders.get("default"))();
+      loader.loadBinaryAsync(path,function(data) {
+        try {
+          success(alphatab.importer.ScoreLoader.loadScoreFromBytes(data));
+        } catch( e ) {
+        if( js.Boot.__instanceof(e,String) ) {
+          error(e);
+        } else throw(e);
+        }
+	},error);
+      //MISTERIO
+      $log.debug(bytes);
+      var score = alphatab.importer.ScoreLoader.loadScoreFromBytes(bytes);
+      $scope.song = toJson(score);
+      var song = {
+        "title": title,
+        "artist": $scope.song.artist,
+        "timeSignature": [4, 4],
+        "tempo": 80,
+        "vexTabCode": [toVexTabCode($scope.song)]
+      };
+      
+      var $tab = $('#tab'),
+        tabCode = "",
+        tabLineCount = song.vexTabCode.length,
+        i;
+  
+      for (i = 0; i < tabLineCount; i++) {
+        tabCode += song.vexTabCode[i] + "\n";
+      }
+  
+      $tab.empty().append(tabCode);
+      var tabDiv = new Vex.Flow.TabDiv("#tab");
+      var player = new TabPlayer({ 'tabDiv': tabDiv, 'tempo': 60 });
+      },function(e){$log.error(e)}
+    );
 });
 
 function toVexTabCode(json){
