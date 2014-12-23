@@ -9,6 +9,10 @@
 */
 
 angular.module('GLedMovile.controllers')
-  .controller('SongsCtrl',function($scope, FileService) {
-	  $scope.songs = FileService.listTablatures();
+  .controller('SongsCtrl',function($scope,FileService) {
+    $scope.songs = FileService.listTablatures();
+    if(!ionic.Platform.isAndroid()){
+      $scope.songs=[];
+      $scope.songs.push("prueba.gp5");
+    }
 });

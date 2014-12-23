@@ -9,40 +9,31 @@
 */
 
 angular.module('GLedMovile.controllers')
-  .controller('SongCtrl',function($scope,$stateParams) {
-    var file = $stateParams.songLocation;
+  .controller('SongCtrl',function($scope,$stateParams,FileService) {
+    var file = $stateParams.songName;
     var title = file.replace(/\.[^/.]+$/, "");
-    var score = alphatab.importer.ScoreLoader.loadScoreAsync("prueba.gp5",function(score) {
-      $scope.song = toJson(score);
-      var song = {
-        "title": title,
-        "artist": $scope.song.artist,
-        "timeSignature": [4, 4],
-        "tempo": 80,
-        "vexTabCode": [toVexTabCode($scope.song)]
-      };
+    var score = alphatab.importer.ScoreLoader.loadScoreFromBytes(FileService.getFile(file));
+    $scope.song = toJson(score);
+    var song = {
+      "title": title,
+      "artist": $scope.song.artist,
+      "timeSignature": [4, 4],
+      "tempo": 80,
+      "vexTabCode": [toVexTabCode($scope.song)]
+    };
+    
+    var $tab = $('#tab'),
+      tabCode = "",
+      tabLineCount = song.vexTabCode.length,
+      i;
 
-      prepareTab(song);
+    for (i = 0; i < tabLineCount; i++) {
+      tabCode += song.vexTabCode[i] + "\n";
+    }
 
-      function prepareTab(aSong) {
-
-        var $tab = $('#tab'),
-          tabCode = "",
-          tabLineCount = song.vexTabCode.length,
-          i;
-
-        for (i = 0; i < tabLineCount; i++) {
-          tabCode += song.vexTabCode[i] + "\n";
-        }
-
-        $tab.empty().append(tabCode);
-        var tabDiv = new Vex.Flow.TabDiv("#tab");
-        var player = new TabPlayer({ 'tabDiv': tabDiv, 'tempo': 60 });
-      }
-
-    }, function(error) {
-      console.error(error);
-    });
+    $tab.empty().append(tabCode);
+    var tabDiv = new Vex.Flow.TabDiv("#tab");
+    var player = new TabPlayer({ 'tabDiv': tabDiv, 'tempo': 60 });
 });
 
 function toVexTabCode(json){

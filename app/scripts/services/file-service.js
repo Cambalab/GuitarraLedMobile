@@ -4,16 +4,30 @@ angular.module('GLedMovile.services')
 .factory('FileService', function(_, $q,$window, $cordovaFile, $log,$ionicPlatform,$rootScope) {
   var fileService = {};
   var tabList = [];
-  $ionicPlatform.ready(function() {
-    if(ionic.Platform.isAndroid()){
-     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFSSuccess, FileError);
-    }
-  })
+  var requestedFile;
+  read(dirOnFSSuccess);
 
-  function onFSSuccess(fileSystem) {
-    fileSystem.root.getDirectory("guitarraledmobile/tabs/", {create: false, exclusive: false}, doDirectoryListing, FileError);
+  function read(fsCallback){
+    $ionicPlatform.ready(function() {
+      if(ionic.Platform.isAndroid()){
+       window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fsCallback, FileError);
+      }
+    })
   }
-
+  
+  function fileOnFSSuccess(fileName,fileSystem){
+    fileSystem.root.getFile("guitarraledmobile/tabs/"+fileName,{create:false},saveFile,FileError);
+  }
+  
+  function dirOnFSSuccess(fileSystem) {
+    fileSystem.root.getDirectory("guitarraledmobile/tabs/", {create: true, exclusive: false}, doDirectoryListing, FileError);
+  }
+  
+  function saveFile(file){
+    requestedFile = file;
+    $rootScope.$apply();
+  }
+  
   function doDirectoryListing(dirEntry) {
     var directoryReader = dirEntry.createReader();
     directoryReader.readEntries(gotFiles, FileError);
@@ -33,6 +47,11 @@ angular.module('GLedMovile.services')
 
   fileService.listTablatures = function(){
     return tabList;
+  }
+
+  fileService.getFile = function(file){
+    read(_.partial(fileOnFSSuccess,file));
+    return requestedFile;
   }
   
   return fileService;

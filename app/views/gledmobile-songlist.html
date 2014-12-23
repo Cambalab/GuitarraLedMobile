@@ -8,7 +8,7 @@
   <div class="list card">
     <ul>
       <li ng-repeat="song in songs | filter:search">
-        <a ui-sref="gledmobile.song({songLocation: song})" class="item item-icon-left">
+        <a ui-sref="gledmobile.song({songName: song})" class="item item-icon-left">
           <i class="icon ion-ios7-play"></i>
           {{song}}
         </a>
