@@ -15,18 +15,6 @@ angular.module('GLedMovile.controllers')
     var bytes;
     FileService.getFile(file).then(function(data){
       bytes = haxe.io.Bytes.ofString(data);
-      //MISTERIO
-      var loader = (alphatab.Environment.fileLoaders.get("default"))();
-      loader.loadBinaryAsync(path,function(data) {
-        try {
-          success(alphatab.importer.ScoreLoader.loadScoreFromBytes(data));
-        } catch( e ) {
-        if( js.Boot.__instanceof(e,String) ) {
-          error(e);
-        } else throw(e);
-        }
-	},error);
-      //MISTERIO
       $log.debug(bytes);
       var score = alphatab.importer.ScoreLoader.loadScoreFromBytes(bytes);
       $scope.song = toJson(score);
