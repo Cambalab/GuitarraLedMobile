@@ -31,7 +31,7 @@ angular.module('GLedMovile.services')
     };
     
     fileEntry.file(function(file){
-      reader.readAsText(file);
+      reader.readAsArrayBuffer(file);
     });
   }
   

@@ -14,7 +14,7 @@ angular.module('GLedMovile.controllers')
     var title = file.replace(/\.[^/.]+$/, "");
     var bytes;
     FileService.getFile(file).then(function(data){
-      bytes = haxe.io.Bytes.ofString(data);
+      bytes = alphatab.platform.js.JsFileLoader.getBytesFromTyped(data);
       $log.debug(bytes);
       var score = alphatab.importer.ScoreLoader.loadScoreFromBytes(bytes);
       $scope.song = toJson(score);
