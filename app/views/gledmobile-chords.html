@@ -1,19 +1,30 @@
 <ion-content class="has-header padding" has-tabs="true">
   <h1>{{ 'CHORDS' | translate }}</h1>
-  <label class="item item-input">
-    <i class="icon ion-search placeholder-icon"></i>
-    <input ng-model="search" placeholder="{{ 'SEARCH' | translate }}">
-  </label>
 
-  <div class="list card">
-    <ul>
-      <li ng-repeat="chord in chords | filter:search">
-        <a ui-sref="gledmobile.chord-display({chordName: chord.name})" class="item item-icon-left">
-          <i class="icon ion-ios7-play"></i>
-          {{chord.name}}
-        </a>
-      </li>
-    </ul>
+  <div class="row">
+    <label class="col item item-input item-select">
+       <div class="input-label">
+         {{ 'ROOT' | translate }}
+       </div>
+       <select ng-model="model.selectedRoot" ng-options="root for root in roots" ng-change="onRootChange(model.selectedRoot)">
+       </select>
+    </label>
+
+  <label class="col item item-input item-select">
+       <div class="input-label">
+         {{ 'CHORD' | translate }}
+       </div>
+       <select ng-model="model.selectedChord" ng-options="chord for chord in chords[model.selectedRoot]" ng-change="onChordChange(model.selectedChord)">
+       </select>
+    </label>
+
+  <div class="col item">
+    <button class="button button-positive icon-left ion-arrow-left-c" ng-click="variacionAbajo()"></button>
+    <button class="button button-positive icon-right ion-arrow-right-c" ng-click="variacionArriba()"></button>
   </div>
+
+  </div>
+
+  <div class="jtab" j-tab chord="model.selectedChord + ':' + model.variation"></div>
 </ion-content>
 
