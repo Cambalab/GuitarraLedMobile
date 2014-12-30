@@ -9,12 +9,15 @@
 */
 
 angular.module('GLedMovile.controllers')
-  .controller('SongCtrl',function($scope) {
-    var file = "prueba.gp5";
+  .controller('SongCtrl',function($scope,$stateParams,FileService,$log) {
+    var file = $stateParams.songName;
     var title = file.replace(/\.[^/.]+$/, "");
-    var score = alphatab.importer.ScoreLoader.loadScoreAsync(file,function(score) {
+    var bytes;
+    FileService.getFile(file).then(function(data){
+      bytes = alphatab.platform.js.JsFileLoader.getBytesFromTyped(data);
+      $log.debug(bytes);
+      var score = alphatab.importer.ScoreLoader.loadScoreFromBytes(bytes);
       $scope.song = toJson(score);
-      console.log($scope.song);
       var song = {
         "title": title,
         "artist": $scope.song.artist,
@@ -22,28 +25,21 @@ angular.module('GLedMovile.controllers')
         "tempo": 80,
         "vexTabCode": [toVexTabCode($scope.song)]
       };
-
-      prepareTab(song);
-
-      function prepareTab(aSong) {
-
-        var $tab = $('#tab'),
-          tabCode = "",
-          tabLineCount = song.vexTabCode.length,
-          i;
-
-        for (i = 0; i < tabLineCount; i++) {
-          tabCode += song.vexTabCode[i] + "\n";
-        }
-
-        $tab.empty().append(tabCode);
-        var tabDiv = new Vex.Flow.TabDiv("#tab");
-        var player = new TabPlayer({ 'tabDiv': tabDiv, 'tempo': 60 });
+      
+      var $tab = $('#tab'),
+        tabCode = "",
+        tabLineCount = song.vexTabCode.length,
+        i;
+  
+      for (i = 0; i < tabLineCount; i++) {
+        tabCode += song.vexTabCode[i] + "\n";
       }
-
-    }, function(error) {
-      console.error(error);
-    });
+  
+      $tab.empty().append(tabCode);
+      var tabDiv = new Vex.Flow.TabDiv("#tab");
+      var player = new TabPlayer({ 'tabDiv': tabDiv, 'tempo': 60 });
+      },function(e){$log.error(e)}
+    );
 });
 
 function toVexTabCode(json){
@@ -128,7 +124,6 @@ function toJson(score) {
         json.masterBars.push({
             timeSignatureNumerator: masterBar.timeSignatureNumerator,
             timeSignatureDenominator: masterBar.timeSignatureDenominator,
-            // .. and the rest of the properties
         });
     }
 
@@ -137,8 +132,6 @@ function toJson(score) {
         var track = score.tracks[t];
         var trackJson = {
             name: track.name,
-            // .. and the rest of the properties
-
             bars: []
         };
         json.tracks.push(trackJson);
@@ -147,7 +140,6 @@ function toJson(score) {
             var bar = track.bars[b];
             var barJson = {
                 clef: bar.clef,
-                // .. and the rest of the properties
                 voices: []
             };
             trackJson.bars.push(barJson);
@@ -168,7 +160,6 @@ function toJson(score) {
                     var beatJson = {
                         isEmpty: beat.isEmpty,
                         duration: beat.duration,
-                        // .. and the rest of the properties
                         notes: []
                     };
                     voiceJson.beats.push(beatJson);
@@ -179,7 +170,6 @@ function toJson(score) {
                         var noteJson = {
                             fret: note.fret,
                             string: note.string
-                            // // .. and the rest of the properties
                         };
                         beatJson.notes.push(noteJson);
                     } // Notes

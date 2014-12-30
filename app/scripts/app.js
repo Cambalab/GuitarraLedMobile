@@ -96,7 +96,7 @@ angular
         }
       })
       .state('gledmobile.song', {
-        url: '/song',
+        url: '/song/:songName',
         views: {
           'gledmobile-guitarlist': {
             templateUrl: 'views/gledmobile-song.html',
@@ -109,7 +109,6 @@ angular
         views: {
           'gledmobile-about': {
             templateUrl: 'views/gledmobile-about.html',
-            controller: 'BtCtrl'
           }
         }
       });

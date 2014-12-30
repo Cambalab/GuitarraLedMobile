@@ -14,8 +14,7 @@ angular.module('GLedMovile.controllers')
   .controller('GLedCtrl',function($scope, $state, $ionicModal, $ionicLoading, $log, $q, $localStorage, $sessionStorage, BluetoothService) {
 
   $scope.bluetoothDevices = BluetoothService.devices;
-  $scope.Bluetooth= BluetoothService;
-
+  $scope.Bluetooth = BluetoothService;
   $scope.conectarBluetooth = function(options) {
     var device = options.device;
     var dfd = $q.defer()

@@ -8,6 +8,7 @@ var pluginlist = [
   'org.apache.cordova.console',
   'org.apache.cordova.device-orientation',
   'org.apache.cordova.splashscreen',
+  'org.apache.cordova.file',
   'com.ionic.keyboard',
   'https://github.com/don/BluetoothSerial.git'
 ];
