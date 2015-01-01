@@ -1,8 +1,23 @@
 <ion-content class="has-header padding" has-tabs="true">
   <h1>{{ 'SONG' | translate }}</h1>
-  <div id="tab" class="vex-tabdiv" width=900 scale=1.0 editor="false">
+
+  <ul class="list" ng-show="true">
+    <button ng-click="player.player.play()">PLAY</button>
+    <button ng-click="player.player.pause()">Pause</button>
+    <button ng-click="player.player.stop()">Stop</button>
+    <li class="item"> Tempo: {{ song.tempo }} <input type="range" ng-model="song.tempo" min=40 max=320 step=1> </li>
+  </ul>
+
+  <div vexplayer
+    song="song.vexTabCode"
+    player="player"
+    tempo="song.tempo"
+    show_errors="true"
+    preload_soundfonts="true"
+    on_note_on="onNoteOn"
+  >
   </div>
   <div>
-    {{song}}
+    {{song.vexTabCode}}
   </div>
 </ion-content>

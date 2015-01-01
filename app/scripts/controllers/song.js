@@ -13,33 +13,38 @@ angular.module('GLedMovile.controllers')
     var file = $stateParams.songName;
     var title = file.replace(/\.[^/.]+$/, "");
     var bytes;
+
+    var song = {
+      "title": title,
+      "artist": "",
+      "timeSignature": [4, 4],
+      "tempo": 80,
+      "vexTabCode": ""
+    };
+    $scope.song = song;
+
     FileService.getFile(file).then(function(data){
       bytes = alphatab.platform.js.JsFileLoader.getBytesFromTyped(data);
       $log.debug(bytes);
+
       var score = alphatab.importer.ScoreLoader.loadScoreFromBytes(bytes);
-      $scope.song = toJson(score);
-      var song = {
-        "title": title,
-        "artist": $scope.song.artist,
-        "timeSignature": [4, 4],
-        "tempo": 80,
-        "vexTabCode": [toVexTabCode($scope.song)]
-      };
-      
-      var $tab = $('#tab'),
-        tabCode = "",
-        tabLineCount = song.vexTabCode.length,
-        i;
-  
-      for (i = 0; i < tabLineCount; i++) {
-        tabCode += song.vexTabCode[i] + "\n";
-      }
-  
-      $tab.empty().append(tabCode);
-      var tabDiv = new Vex.Flow.TabDiv("#tab");
-      var player = new TabPlayer({ 'tabDiv': tabDiv, 'tempo': 60 });
-      },function(e){$log.error(e)}
-    );
+      var _score = toJson(score);
+
+      $scope.song.vexTabCode = toVexTabCode( score );
+      $scope.song.artist = _score.artist;
+      $scope.$apply();
+    }, function(e){$log.error(e)} );
+
+    // modificado por la directiva vexplayer
+    $scope.player = { };
+
+    $scope.onNoteOn = function(positions) {
+      var payload = { 'detail': { 'current': { 'position': positions }}};
+      var ev = new CustomEvent('note', payload);
+
+      document.dispatchEvent(ev);
+    };
+
 });
 
 function toVexTabCode(json){
