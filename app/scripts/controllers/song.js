@@ -45,6 +45,9 @@ angular.module('GLedMovile.controllers')
       document.dispatchEvent(ev);
     };
 
+    $scope.onUpdateMarker = function(x,y) {
+    };
+
 });
 
 function toVexTabCode(json){

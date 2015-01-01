@@ -6,6 +6,7 @@
     <button ng-click="player.player.pause()">Pause</button>
     <button ng-click="player.player.stop()">Stop</button>
     <li class="item"> Tempo: {{ song.tempo }} <input type="range" ng-model="song.tempo" min=40 max=320 step=1> </li>
+    <li class="item"> Marker: {{ player.marker.x }} {{ player.marker.y }}  </li>
   </ul>
 
   <div vexplayer
@@ -15,6 +16,7 @@
     show_errors="true"
     preload_soundfonts="true"
     on_note_on="onNoteOn"
+    on_update_marker="onUpdateMarker"
   >
   </div>
   <div>
