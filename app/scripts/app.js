@@ -18,7 +18,8 @@ angular
     'pascalprecht.translate',
     'underscore',
     'ngStorage',
-    'ngCordova'
+    'ngCordova',
+    'VexAngular'
   ])
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
