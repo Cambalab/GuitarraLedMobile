@@ -45,5 +45,15 @@
   },
   "scripts": {
     "test": "grunt test"
-  }
+  },
+  "cordovaPlugins": [
+    "org.apache.cordova.splashscreen",
+    "org.apache.cordova.console",
+    "org.apache.cordova.file",
+    "com.ionic.keyboard",
+    {
+      "id": "org.crosswalk.engine",
+      "locator": "./engine/cordova-crosswalk-engine-c0.6.2"
+    }
+  ]
 }
