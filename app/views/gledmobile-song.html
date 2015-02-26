@@ -1,4 +1,4 @@
-<ion-content class="has-header padding" has-tabs="true">
+<ion-content class="has-header padding" has-tabs="true" scroll="false">
   <h1>{{ 'SONG' | translate }}</h1>
 
   <ul class="list" ng-show="true">
@@ -9,6 +9,7 @@
     <li class="item"> Marker: {{ player.marker.x }} {{ player.marker.y }}  </li>
   </ul>
 
+  <ion-scroll delegate-handle="player-scroll" zooming="true" direction="xy" style="height: 100%">
   <div vexplayer
     song="song.vexTabCode"
     player="player"
@@ -22,4 +23,5 @@
   <div>
     {{song.vexTabCode}}
   </div>
+  </ion-scroll>
 </ion-content>

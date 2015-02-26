@@ -9,10 +9,12 @@
 */
 
 angular.module('GLedMovile.controllers')
-  .controller('SongCtrl',function($scope,$stateParams,FileService,$log) {
+  .controller('SongCtrl',function($scope,$stateParams,$ionicScrollDelegate, FileService,$log) {
     var file = $stateParams.songName;
     var title = file.replace(/\.[^/.]+$/, "");
     var bytes;
+
+    var playerScroll = $ionicScrollDelegate.$getByHandle('player-scroll');
 
     var song = {
       "title": title,
@@ -45,7 +47,13 @@ angular.module('GLedMovile.controllers')
       document.dispatchEvent(ev);
     };
 
-    $scope.onUpdateMarker = function(x,y) {
+    $scope.onUpdateMarker = function(x,y, note) {
+        var zoom = playerScroll.getScrollView().getValues().zoom;
+        var stave = note.getStave();
+        var options = stave.options;
+        var y = stave.y - options.space_above_staff_ln * options.spacing_between_lines_px;
+
+        ps.scrollTo(x*zoom,y*zoom);
     };
 
 });
