@@ -2,19 +2,21 @@
 # Pre-install
 * node
 * npm
+* Android SDK
 
 # Install
 
 ```
-git clone http://lanus.elarteylatecnologia.com.ar:8081/fmmainere/guitarraledmobile.git
+git clone https://github.com/CrearAyT/GuitarraLedMobile.git
 ```
 
-## App Dedepencies
+## App Deependencies
 
 ```
 npm install
 bower install
 grunt platform:add:android
+ionic browser add crosswalk
 ```
 
 ## Run test
@@ -25,12 +27,6 @@ grunt test
 ## Run App
 ```
 grunt cordova
-grunt run
-```
-
-## Run App
-```
-grunt cordova
-adb install -r platforms/android/ant-build/GuitarraLedMobile-debug.apk
+adb install -r platforms/android/build/outputs/apk/android-armv7-debug.apk
 ```
 
