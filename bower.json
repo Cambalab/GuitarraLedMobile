@@ -21,6 +21,7 @@
   },
   "resolutions": {
     "angular": "~1.2.17",
-    "jtab": "bower"
+    "jtab": "bower",
+    "underscore": "~1.7.0"
   }
 }

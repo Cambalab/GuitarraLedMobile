@@ -2,6 +2,13 @@
 # Pre-install
 * node
 * npm
+* bower
+* grunt-cli
+* ant
+* android sdk
+* adb
+* jdk
+
 
 # Install
 
@@ -14,12 +21,13 @@ git clone http://lanus.elarteylatecnologia.com.ar:8081/fmmainere/guitarraledmobi
 ```
 npm install
 bower install
-grunt platform:add:android
 ```
 
-## Run test
+## Add Android Platform
+add to your .bashrc this line: ```export ANDROID_SDK=/location/of/your/android/sdk```
+and run:
 ```
-grunt test
+grunt platform:add:android
 ```
 
 ## Run App
