@@ -53,7 +53,7 @@ angular.module('GLedMovile.controllers')
         var options = stave.options;
         var y = stave.y - options.space_above_staff_ln * options.spacing_between_lines_px;
 
-        ps.scrollTo(x*zoom,y*zoom);
+        playerScroll.scrollTo(x*zoom,y*zoom);
     };
 
 });
