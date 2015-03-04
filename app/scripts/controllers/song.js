@@ -39,7 +39,7 @@ angular.module('GLedMovile.controllers')
     $scope.player = { };
 
     $scope.onNoteOn = function(positions) {
-      var payload = { 'detail': { 'current': { 'position': positions }}};
+      var payload = { 'detail': { 'current': { 'position': positions.tab_spec }}};
       var ev = new CustomEvent('note', payload);
 
       document.dispatchEvent(ev);
