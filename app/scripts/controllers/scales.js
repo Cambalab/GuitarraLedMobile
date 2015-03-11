@@ -9,7 +9,8 @@
 */
 
 angular.module('GLedMovile.controllers')
-  .controller('ScalesCtrl',function($scope) {
+  .controller('ScalesCtrl',function($scope, timeout) {
+      timeout.id = 1337;
 	  $scope.scales = [
                 { name: "C", abc: "|CEGc|", hex:"" }
             ];

@@ -90,6 +90,12 @@ angular
       })
       .state('gledmobile.scales', {
         url: '/scales',
+        resolve: {
+            timeout: function(){ return {}; }
+        },
+        onExit: function(timeout) {
+            console.log(timeout.id);
+        },
         views: {
           'gledmobile-guitarlist': {
             templateUrl: 'views/gledmobile-scales.html',
