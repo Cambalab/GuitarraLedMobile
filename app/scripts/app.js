@@ -93,8 +93,9 @@ angular
         resolve: {
             timeout: function(){ return {}; }
         },
-        onExit: function(timeout) {
-            console.log(timeout.id);
+        onExit: function(timeout, $interval) {
+            console.log(timeout);
+            $interval.cancel(timeout.intervalo);
         },
         views: {
           'gledmobile-guitarlist': {

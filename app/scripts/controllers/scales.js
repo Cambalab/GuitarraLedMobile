@@ -9,8 +9,8 @@
 */
 
 angular.module('GLedMovile.controllers')
-  .controller('ScalesCtrl',function($scope, timeout) {
-      timeout.id = 1337;
+  .controller('ScalesCtrl',function($scope, $interval, timeout) {
+      timeout.intervalo = $interval( function() { console.log('aaaa')}, 1000);
 	  $scope.scales = [
                 { name: "C", abc: "|CEGc|", hex:"" }
             ];
