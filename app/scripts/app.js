@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * @ngdoc overview
  * @name gledmobile
@@ -108,3 +107,6 @@ angular
 
     $urlRouterProvider.otherwise('/gledmobile/guitarlist');
   });
+angular.module('GLedMovile.controllers',['ngStorage']);
+angular.module('GLedMovile.services', []);
+angular.module('GLedMovile.directives',[]);

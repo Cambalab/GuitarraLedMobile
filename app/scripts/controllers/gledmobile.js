@@ -8,8 +8,6 @@
 * Controller of gledmobile
 */
 
-angular.module('GLedMovile.controllers',['ngStorage']);
-
 angular.module('GLedMovile.controllers')
   .controller('GLedCtrl',function($scope, $state, $ionicModal, $ionicLoading, $log, $q, $localStorage, $sessionStorage, BluetoothService) {
 

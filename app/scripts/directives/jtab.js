@@ -1,4 +1,4 @@
-angular.module('GLedMovile.directives',[]);
+'use strict';
 angular.module('GLedMovile.directives')
 .directive('jTab',
   function () {

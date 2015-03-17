@@ -1,5 +1,4 @@
 'use strict';
-angular.module('GLedMovile.services', []);
 angular.module('GLedMovile.services')
 .factory('ChordService', function(_) {
   
