@@ -1,8 +1,12 @@
-
 # Pre-install
 * node
 * npm
 * Android SDK
+* bower
+* grunt-cli
+* ant
+* adb
+* jdk
 
 # Install
 
@@ -19,9 +23,11 @@ grunt platform:add:android
 ionic browser add crosswalk
 ```
 
-## Run test
+## Add Android Platform
+add to your .bashrc this line: ```export ANDROID_SDK=/location/of/your/android/sdk```
+and run:
 ```
-grunt test
+grunt platform:add:android
 ```
 
 ## Run App
@@ -29,4 +35,3 @@ grunt test
 grunt cordova
 adb install -r platforms/android/build/outputs/apk/android-armv7-debug.apk
 ```
-
