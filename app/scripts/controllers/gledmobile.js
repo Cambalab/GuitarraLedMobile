@@ -17,7 +17,7 @@ angular.module('GLedMovile.controllers')
   $scope.Bluetooth = BluetoothService;
   $scope.conectarBluetooth = function(options) {
     var device = options.device;
-    var dfd = $q.defer()
+    var dfd = $q.defer();
 
     $ionicLoading.show({
       template: 'Conectando a ' + device.name + ' ...',
@@ -45,7 +45,7 @@ angular.module('GLedMovile.controllers')
     }
 
     return dfd.promise;
-  }
+  };
 
   $localStorage.$default({
     guitars: {}
@@ -53,11 +53,11 @@ angular.module('GLedMovile.controllers')
 
   $scope.guitars = $localStorage.guitars;
 
-  $ionicModal.fromTemplateUrl('views/add-guitar.html', {scope: $scope}).then(function(modal) { $scope.addModal = modal});
+  $ionicModal.fromTemplateUrl('views/add-guitar.html', {scope: $scope}).then(function(modal) { $scope.addModal = modal;});
 
   $scope.noGuitars = function() {
     return _.isEmpty($scope.guitars);
-  }
+  };
 
   $scope.addGuitar = function(device) {
     if ($scope.guitars[device.id] == undefined) {
@@ -70,23 +70,23 @@ angular.module('GLedMovile.controllers')
     } else {
         $scope.closeAddGuitarModal();
     }
-  }
+  };
 
   $scope.isNewGuitar = function(device) {
     return ($scope.guitars[device.address] == undefined);
-  }
+  };
 
   $scope.removeGuitar = function(device) {
     delete $scope.guitars[device.address];
-  }
+  };
 
   $scope.showAddGuitarModal = function() {
     $scope.addModal.show();
-  }
+  };
 
   $scope.closeAddGuitarModal = function() {
     $scope.addModal.hide();
-  }
+  };
 
   $scope.connectToGuitar = function(guitar) {
     BluetoothService.desconectar().then(function() {
@@ -94,7 +94,7 @@ angular.module('GLedMovile.controllers')
           $state.go('gledmobile.modes');
       });
     });
-  }
+  };
 
   $scope.$on('Bluetooth.Enabled', function() {
     if (_.size($scope.guitars) == 1) {

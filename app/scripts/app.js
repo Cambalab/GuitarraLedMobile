@@ -79,15 +79,6 @@ angular
           }
         }
       })
-      .state('gledmobile.chord-display', {
-        url: '/chord-display/:chordName',
-        views: {
-          'gledmobile-guitarlist': {
-            templateUrl: 'views/gledmobile-chord-display.html',
-            controller: 'ChordDisplayCtrl'
-          }
-        }
-      })
       .state('gledmobile.scales', {
         url: '/scales',
         views: {

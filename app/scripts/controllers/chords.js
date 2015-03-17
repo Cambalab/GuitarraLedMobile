@@ -1,13 +1,4 @@
 'use strict';
-
-/**
-* @ngdoc function
-* @name gledmobile.controllers:ChordsCtrl
-* @description
-* # ChordsCtrl
-* Controller of the gledmobile
-*/
-
 angular.module('GLedMovile.controllers')
   .controller('ChordsCtrl',function($scope, ChordService) {
 
@@ -18,7 +9,7 @@ angular.module('GLedMovile.controllers')
       selectedRoot: $scope.roots[0],
       selectedChord: $scope.chords[$scope.roots[0]][0],
       variation: 1,
-    }
+    };
     $scope.model = model;
 
     function __sendNotesToGuitar(positions) {
@@ -31,11 +22,11 @@ angular.module('GLedMovile.controllers')
     $scope.onRootChange = function(root) {
       model.variation = 1;
       model.selectedChord = $scope.chords[root][0];
-    }
+    };
 
     $scope.onChordChange = function(root) {
       model.variation = 1;
-    }
+    };
 
     $scope.$watch(function() {
         return model.selectedChord + ':' + model.variation;
@@ -57,15 +48,15 @@ angular.module('GLedMovile.controllers')
         }
 
         model.variation += 1;
-    }
+    };
 
     $scope.variacionAbajo = function() {
         if (model.variation > 1) {
             model.variation -= 1;
         }
-    }
+    };
 
   })
-  .controller('ChordDisplayCtrl', function($scope, $stateParams, ChordService) {
+ .controller('ChordDisplayCtrl', function($scope, $stateParams, ChordService) {
     $scope.chord = ChordService.get($stateParams.chordName);
   });
