@@ -119,6 +119,10 @@ $log.debug('bt DISabled');
       toLedArray(note.detail.current.position);
       sendData(ledArray);
       }, false);
+ 
+    document.addEventListener('scale', function (scale) {
+      sendData(scale);
+      }, false);
 
     var sendData = function(stringsData) {
       if(__bts.conectado){

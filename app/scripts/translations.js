@@ -21,6 +21,8 @@ var translationsEN = {
   SONGS: 'Songs',
   SEARCH: 'Search',
   BLUETOOTH_DISABLED: 'Bluetooth is disabled',
+  SCALE: 'Scale',
+  TONIC: 'Tonic',
 };
 
 var translationsES = {
@@ -46,6 +48,8 @@ var translationsES = {
   SONGS: 'Canciones',
   SEARCH: 'Buscar',
   BLUETOOTH_DISABLED: 'Bluetooth está deshabilitado',
+  SCALE: 'Escala',
+  TONIC: 'Tónica',
 };
 
 
