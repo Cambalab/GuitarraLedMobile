@@ -8,3 +8,4 @@ app/bower_components
 .tmp
 .sass-cache
 .DS_Store
+engine
