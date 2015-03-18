@@ -8,7 +8,7 @@
 * Controller of the todo
 */
 
-angular.module('GLedMovile.controllers')
+angular.module('GLedMobile.controllers')
   .controller('SongsCtrl',function($scope,FileService) {
     $scope.songs = FileService.listTablatures();
     if(!ionic.Platform.isAndroid()){

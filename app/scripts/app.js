@@ -9,11 +9,11 @@
  */
 
 angular
-  .module('GLedMovile', [
+  .module('GLedMobile', [
     'ionic',
-    'GLedMovile.controllers',
-    'GLedMovile.services',
-    'GLedMovile.directives',
+    'GLedMobile.controllers',
+    'GLedMobile.services',
+    'GLedMobile.directives',
     'pascalprecht.translate',
     'underscore',
     'ngStorage',
@@ -107,6 +107,6 @@ angular
 
     $urlRouterProvider.otherwise('/gledmobile/guitarlist');
   });
-angular.module('GLedMovile.controllers',['ngStorage']);
-angular.module('GLedMovile.services', []);
-angular.module('GLedMovile.directives',[]);
+angular.module('GLedMobile.controllers',['ngStorage']);
+angular.module('GLedMobile.services', []);
+angular.module('GLedMobile.directives',[]);

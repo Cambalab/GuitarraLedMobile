@@ -8,7 +8,7 @@
 * Controller of gledmobile
 */
 
-angular.module('GLedMovile.controllers')
+angular.module('GLedMobile.controllers')
   .controller('GLedCtrl',function($scope, $state, $ionicModal, $ionicLoading, $log, $q, $localStorage, $sessionStorage, BluetoothService) {
 
   $scope.bluetoothDevices = BluetoothService.devices;

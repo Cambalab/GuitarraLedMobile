@@ -8,7 +8,7 @@
 * Controller of the todo
 */
 
-angular.module('GLedMovile.controllers')
+angular.module('GLedMobile.controllers')
   .controller('SongCtrl',function($scope,$stateParams,$ionicScrollDelegate, FileService,$log) {
     var file = $stateParams.songName;
     var title = file.replace(/\.[^/.]+$/, "");

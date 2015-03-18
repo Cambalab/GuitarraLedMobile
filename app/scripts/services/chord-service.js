@@ -1,5 +1,5 @@
 'use strict';
-angular.module('GLedMovile.services')
+angular.module('GLedMobile.services')
 .factory('ChordService', function(_) {
   
   var roots = 'CDEFGAB';
@@ -45,7 +45,7 @@ angular.module('GLedMovile.services')
       var newString = 6 - string;  // de 1 a 6 pero en orden reverso.
       var fret = fpos[0];
 
-      if (fret == -1) {
+      if (fret === -1) {
         return;
       }
 

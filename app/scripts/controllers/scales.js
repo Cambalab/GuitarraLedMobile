@@ -1,5 +1,5 @@
 'use strict';
-angular.module('GLedMovile.controllers')
+angular.module('GLedMobile.controllers')
   .controller('ScalesCtrl',function($scope, ScaleService, $interval) {
     
     $scope.scales = ScaleService.groupedScales;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('GLedMovile.services')
+angular.module('GLedMobile.services')
 .factory('FileService', function(_, $q,$window, $cordovaFile, $log,$ionicPlatform,$rootScope) {
   var fileService = {};
   var tabList = [];

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('GLedMovile.controllers')
+angular.module('GLedMobile.controllers')
   .controller('ChordsCtrl',function($scope, ChordService) {
 
     $scope.chords = ChordService.all;

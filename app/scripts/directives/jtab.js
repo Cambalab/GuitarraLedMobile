@@ -1,5 +1,5 @@
 'use strict';
-angular.module('GLedMovile.directives')
+angular.module('GLedMobile.directives')
 .directive('jTab',
   function () {
     return {

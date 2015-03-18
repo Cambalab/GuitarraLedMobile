@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('GLedMovile.services')
+angular.module('GLedMobile.services')
 .factory('BluetoothService', function(_, $q, $interval, $cordovaBluetoothSerial, $log, $rootScope, $ionicLoading) {
 
   var bluetoothDevices = [];
